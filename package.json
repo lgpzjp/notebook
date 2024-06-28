@@ -7,20 +7,7 @@
   },
   "scripts": {
     "mock": "node mocky/mocky.js",
-    "compodoc": "compodoc -p src/tsconfig.app.json --disablePrivate --disableLifeCycleHooks -w -s",
-    "build:compodoc": "rimraf documentation && compodoc -p src/tsconfig.app.json --disablePrivate --disableLifeCycleHooks",
-    "local:npm": "node verdaccio.js",
-    "ng": "ng",
-    "start": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.json",
-    "start:itb": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy-itb.conf.json",
-    "start:bl": "blserve",
-    "build": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build",
-    "build:aot": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --aot",
-    "test": "ng test --sr --cc --reporters=mocha",
-    "watch": "ng test -sm",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
+
   "private": true,
   "repository": {
     "type": "git",
