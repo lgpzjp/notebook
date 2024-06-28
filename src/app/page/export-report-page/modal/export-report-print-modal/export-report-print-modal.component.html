@@ -1,0 +1,15 @@
+<bl-modal-content #content
+  [title]="'印刷内容を確認してください'"
+  [footerButtonType]="footerButtonType"
+>
+  <div body>
+    <share-generic-print-form #genericForm
+      [genericPrint]="genericPrint"
+      [reportLayoutSettingList]="reportLayoutSettingList"
+      [printerSettingList]="printerSettingList">
+    </share-generic-print-form>
+  </div>
+  <div footer>
+    <share-generic-print-footer #genericFooter></share-generic-print-footer>
+  </div>
+</bl-modal-content>

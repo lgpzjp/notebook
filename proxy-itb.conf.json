@@ -1,0 +1,69 @@
+[
+  {
+    "context": [
+      "/api",
+      "/public/api/v1/locator/common"
+    ],
+    "target": "http://localhost:4321",
+    "secure": false
+  },
+  {
+    "context": [
+      "/common/api",
+      "/file/api",
+      "/report/api",
+      "/reportevent/api",
+      "/vehicle/api",
+      "/company/api",
+      "/customer/api",
+      "/contract/api",
+      "/sales/api",
+      "/salesevent/api",
+      "/g/credit/api",
+      "/g/creditevent/api",
+      "/g/deals/api",
+      "/g/dealsevent/api",
+      "/bizcmn/api",
+      "/cmnservice/api",
+      "/role/api",
+      "/g/schedule/api",
+      "/vehicleapply/api",
+      "/notification/api",
+      "/bizevent/api",
+      "/lam/api",
+      "/license/api",
+      "/migration/api",
+      "/mamigration/api",
+      "/managementreport/api",
+      "/g/approach/api",
+      "/g/process/api",
+      "/g/output/api",
+      "/billingplatform/api",
+      "/g/accounting/api",
+      "/g/profile/api",
+      "/g/sns/api",
+      "/public/api",
+      "/menu",
+      "/contract"
+    ],
+    "target": "https://dev-01.blcloud.jp",
+    "changeOrigin": true,
+    "cookieDomainRewrite": "",
+    "secure": false,
+    "logLevel": "debug",
+    "bl": {},
+    "user-agent:": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
+    "headers": {
+      "Cookie": "_gcl_au=1.1.1770167832.1715241417; _tt_geuid=0891eb13-5dc6-428b-9ef3-926eaf962c17; _tt_geuid=0891eb13-5dc6-428b-9ef3-926eaf962c17; _ga=GA1.1.1806187783.1717746395; _ga_2ECT4031ZP=GS1.1.1718084259.4.1.1718084293.0.0.0; _ga_QNWVT7553R=GS1.1.1718142731.8.0.1718153291.0.0.0; _tt_session_envi-65641854-07c5-aa5e-6975-19d1067cc073={%22id%22:%22f32ac4e6-73fb-4744-9730-530f3573a34b%22%2C%22lastSentAt%22:1718169714839%2C%22startedAt%22:1718163023183}; iPlanetDirectoryPro=AQIC5wM2LY4SfcxELP_SgYA14SSF1L2955TBARCZm1sXS9w.*AAJTSQACMDIAAlNLABM4MzgyODIzNTY3OTg4Mjk5ODgyAAJTMQACMDM.*; id_token=eyAidHlwIjogIkpXVCIsICJraWQiOiAiU3lsTEM2Tmp0MUtHUWt0RDlNdCswemNlUVNVPSIsICJhbGciOiAiUlMyNTYiIH0.eyAiYXRfaGFzaCI6ICIwcFowNDhDZkZoeml6TktQdDQxeExBIiwgInN1YiI6ICJibGxkbnM2N18xODEzIiwgImlzcyI6ICJodHRwczovL2Rldi0wMS1sb2dpbmJwLmJsY2xvdWQuanAvb3BlbmFtL29hdXRoMi9ibGNsb3VkIiwgInRva2VuTmFtZSI6ICJpZF90b2tlbiIsICJub25jZSI6ICIwNjE4MDkiLCAiYXVkIjogWyAiYmxjbG91ZFJQIiBdLCAib3JnLmZvcmdlcm9jay5vcGVuaWRjb25uZWN0Lm9wcyI6ICJlNTQyZWQ3OS1jYmFiLTQzOGEtOWUzOS1lMmYzZjQzMDU0NmEiLCAiYmxVc2VySWQiOiAiMTAyNDYiLCAiYXpwIjogImJsY2xvdWRSUCIsICJhdXRoX3RpbWUiOiAxNzE4OTM1ODQzLCAicmVhbG0iOiAiL2JsY2xvdWQiLCAiZXhwIjogMTcxOTAwNzg0MywgInRva2VuVHlwZSI6ICJKV1RUb2tlbiIsICJibFRlbmFudElkIjogIjE4MTMiLCAiaWF0IjogMTcxODkzNTg0MyB9.G5iddIuzbLyDKfbo9G4g2GUzdBXwIbRYHt2GuV0mt6SKtyHJ5SIKGCEu67G4R1GelcbYCGTpy37T1h7daqFnxJ984MrHlzSe3TpOaWs-q8SBGykUhDBmQaj3tBIeN7HMqDjCeXI3Vx1KZC75Gg6LbJZ7Smbx6gKoa7pDcJQUFtM",
+      "x-blcloud-client-device-id": "fcb721e9-8a0c-ce9d-08e5-0e0518aa57dd",
+      "x-blcloud-client-tab-id": "ba29eaed-458b-959d-3459-d5a9a8def8d8",
+      "Connection": "keep-alive",
+      "referer": "https://dev-01.blcloud.jp",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "x-blcloud-page-id": "",
+      "origin":"https://dev-01.blcloud.jp"
+    }
+  }
+]

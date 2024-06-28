@@ -1,0 +1,144 @@
+variables:
+  CI_SHELL: bl-ng-spa-ci-single
+  GIT_REPOS_CI_SHELL: https://dev-gitlab.broadleaf.jp/blcloud-webfrontend-spa/bl-ng-spa-ci-single.git
+  WORK_BUILDS_PATH: ../work-builds/$CI_PROJECT_NAME
+
+stages:
+  - check-build
+  - variables
+  - compile
+  - build
+  - build2
+  - deploy
+  - deploy-addon
+
+check-build:
+  stage: check-build
+  tags:
+    - blcloud-npm-build2
+  script:
+    - git clone $GIT_REPOS_CI_SHELL
+    - chmod 755 -R $CI_SHELL/*.sh
+    - source ./$CI_SHELL/env-enviroment.sh
+    - ./$CI_SHELL/env-npm-init.sh
+    - ./$CI_SHELL/build-init.sh
+    - cd $WORK_BUILDS_PATH
+    - echo npm run lint
+    - echo npm run test
+    - npm install --no-save --no-progress
+    - npm update --no-save --no-progress
+    - npm run build -- --aot --progress=false
+  only:
+    - /^feature\/.*$/
+    - /^hotfix\/.*$/
+    - /^topic\/.*$/
+
+variables-ci:
+  stage: variables
+  tags:
+    - blcloud-npm-build2
+  script:
+    - git clone $GIT_REPOS_CI_SHELL
+    - chmod 755 -R $CI_SHELL/*.sh
+    - ./$CI_SHELL/build-init.sh
+    - ./$CI_SHELL/variables-ci.sh $CI_PROJECT_NAME
+  only:
+    - develop
+    - release-candidate01
+    - staging
+    - tags
+  except:
+    - schedules
+  artifacts:
+    reports:
+      dotenv: variables.env
+
+npm-compile-app:
+  stage: compile
+  tags:
+    - blcloud-npm-build2
+  script:
+    - git clone $GIT_REPOS_CI_SHELL
+    - chmod 755 -R $CI_SHELL/*.sh
+    - ./$CI_SHELL/build-init.sh
+    - cd $WORK_BUILDS_PATH
+    - source ./$CI_SHELL/env-enviroment.sh
+    - ./$CI_SHELL/env-npm-init.sh
+    - ./$CI_SHELL/compile-spa.sh
+  only:
+    - develop
+    - release-candidate01
+    - staging
+    - tags
+  except:
+    - schedules
+  needs:
+    - job: variables-ci
+      artifacts: true
+
+docker-build:
+  stage: build
+  tags:
+    - blcloud-npm-build2
+  script:
+    - cd $WORK_BUILDS_PATH
+    - chmod 755 -R $CI_SHELL/*.sh
+    - ./$CI_SHELL/build-docker.sh
+  only:
+    - develop
+    - release-candidate01
+    - tags
+  except:
+    - schedules
+  needs:
+    - job: variables-ci
+      artifacts: true
+    - job: npm-compile-app
+      artifacts: false
+
+docker-build2:
+  stage: build2
+  tags:
+    - blcloud-npm-build2
+  script:
+    - cd $WORK_BUILDS_PATH
+    - chmod 755 -R $CI_SHELL/*.sh
+    - ./$CI_SHELL/build-docker.sh
+  only:
+    - staging
+  except:
+    - schedules
+  needs:
+    - job: variables-ci
+      artifacts: true
+    - job: npm-compile-app
+      artifacts: false
+  when: manual
+
+application-deploy:
+  stage: deploy
+  tags:
+    - blcloud-npm-build2
+  script:
+    - cd $WORK_BUILDS_PATH
+    - chmod 755 -R $CI_SHELL/*.sh
+    - ./$CI_SHELL/deploy.sh
+  only:
+    - develop
+    - release-candidate01
+  except:
+    - schedules
+  needs:
+    - job: variables-ci
+      artifacts: true
+    - job: docker-build
+      artifacts: false
+
+nginx-deploy-addon:
+  stage: deploy-addon
+  tags:
+    - blcloud-npm-build2
+  script:
+    - "curl -X POST -F token=$ADDON_TOKEN -F ref=$CI_COMMIT_REF_NAME -F variables[CALL_TRIGGER_REPOSURL]=$CALL_TRIGGER_REPOSURL -F variables[CALL_TRIGGER_TAG]=$CALL_TRIGGER_TAG $ADDON_TRIGGER"
+  only:
+    - schedules

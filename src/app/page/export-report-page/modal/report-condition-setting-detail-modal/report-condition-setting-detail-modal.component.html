@@ -1,0 +1,25 @@
+<bl-modal-content
+  #content
+  [title]="title"
+  [footerButtonType]="footerButtonType"
+  [disableOkButton]="isDisableOkButton"
+>
+  <ng-container body>
+    <label class="title">条件タイトル</label>
+    <div class="condition-row">
+      <bl-text-input
+        [(value)]="conditionName"
+        [maxlength]="60"
+        (updateEvent)="onChangeConditionName($event)"
+        >
+      </bl-text-input>
+      <bl-radio-group
+        *ngIf="data && data.mode === ReportConditionSettingDetailModalMode.Add"
+        [value]="reportConditionSettingUserDiv"
+        [items]="reportConditionSettingUserDivArray"
+        [groupType]="'inline'"
+        (changeEvent)="onChangeReportConditionSettingUserDiv($event)"
+      ></bl-radio-group>
+    </div>
+  </ng-container>
+</bl-modal-content>

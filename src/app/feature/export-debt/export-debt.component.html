@@ -1,0 +1,98 @@
+<ng-container>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="search-condition">
+          <div class="tab-header">
+            出力条件を指定して　出力開始　ボタンをクリックしてください。
+          </div>
+          <div class="tab-body">
+            <div class="row">
+              <div class="col-xs-12 search-condition__contents">
+                <div class="search-icon">
+                  <span _ngcontent-c11="" class="icon-icon_search"></span>
+                </div>
+                <div class="big-g-1">
+                  <div class="row">
+                    <div class="group-1">
+                      <label>出力内容</label>
+                      <div class="form-group condition-flex">
+                        <bl-select
+                          id="outputInfo"
+                          [value]="exportDebtConditionSearch.outputInfo"
+                          [items]="DebtExportContentArray"
+                          [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                          (changeEvent)="onChangeOutputInfo($event)">
+                        ></bl-select>
+                      </div>
+                    </div>
+                    <div class="group-67">
+                      <label>対象期間</label>
+                      <div class="form-group condition-flex">
+                        <app-date-picker-condition
+                          [startDate]="startDate"
+                          [endDate]="endDate"
+                          [dateMode]="dateMode"
+                          [displayEndDate]="displayEndDate"
+                          (startDateChange)="onStartDateChange($event)"
+                          (endDateChange)="onEndDateChange($event)">
+                        </app-date-picker-condition>
+                      </div>
+                    </div>
+                    <div class="group-11">
+                      <label>締日</label>
+                      <div class="form-group condition-flex">
+                        <bl-select [disabled]="!isShowPayHistory"
+                          id="cutoffDay"
+                          [value]="exportDebtConditionSearch.cutoffDay"
+                          [items]="CutoffDay"
+                          [option]="{ valueProperty: 'code', labelProperty: 'name' }"
+                          (changeEvent)="onChangeCutoffDay($event)">
+                        ></bl-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="group-1">
+                      <label>組織</label>
+                      <div class="form-group condition-flex">
+                        <share-organization-combo-box
+                          id="organization"
+                          [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                          [value]="selectedOrganizationCode"
+                          (changeEvent)="onChangeOrgCode($event)">
+                        </share-organization-combo-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="big-g-2">
+                  <button
+                    class="btn btn-default"
+                    type="button"
+                    (click)="onClickDetailButton()"
+                  >
+                    <span>詳細条件</span>
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-detail-debt-condition
+            #conditions
+            [detailDebtCondition]="detailDebtConditionValue"
+            (changeEvent)="onChangeDetailDebtCondition($event)"
+            (clearCondition)="onClearCondition()"
+          ></app-detail-debt-condition>
+        </div>
+      </div>
+      <app-export-pattern-selector
+        [tabID]="productCode === ProductCode.Recycle ? exportInfoTabDiv.RecycleDebt : exportInfoTabDiv.Debt"
+        [(exportCondition)]="exportDebtConditionSearch"
+        [dataExportPatterns]="dataExportPatterns"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-pattern-selector>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,34 @@
+<div class="small-item-in-g2">
+  <button class="btn btn-default" [disabled]="!displayStartButton"
+    (keydown)="onKeyDownToButtonFocus($event)"
+    (click)="onClickOneMonth(false)">＜１ヶ月前
+  </button>
+</div>
+<div class="big-item-in-g2_l" *ngIf="displayStartDate">
+  <bl-date
+    #startDateEle
+    [value]="startDate"
+    [dateMode]="dateMode"
+    [era]="era"
+    (changeEvent)="onChangeTargetDate($event, 'startDate')"
+    [disabled]="!displayStart">
+  </bl-date>
+</div>
+<span class="v-small-item-in-g2" *ngIf="displayEndDate">
+  ～
+</span>
+<div class="big-item-in-g2_r" *ngIf="displayEndDate">
+  <bl-date
+    [value]="endDate"
+    [dateMode]="dateMode"
+    [era]="era"
+    (changeEvent)="onChangeTargetDate($event, 'endDate')"
+    [disabled]="!displayEnd">
+  </bl-date>
+</div>
+<div class="small-item-in-g2">
+  <button class="btn btn-default" [disabled]="!displayEndButton"
+    (keydown)="onKeyDownToButtonFocus($event)"
+    (click)="onClickOneMonth()">１ヶ月先＞
+  </button>
+</div>

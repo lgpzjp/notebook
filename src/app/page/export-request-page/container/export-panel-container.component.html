@@ -1,0 +1,62 @@
+<div class="export-group">
+  <div class="export-group__header">出力する条件を指定してください</div>
+  <div class="export-group__body">
+    <div
+      class="export-item organization-item"
+      *ngIf="organizationSelectMode"
+    >
+      <div class="export-item__label"><span>組織</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <share-organization-combo-box
+            [value]="_organizationCode"
+            [officeControl]="officeControl"
+            [withAllCompanyDiv]="organizationSelectMode"
+            (readyEvent)="onReadyOrganizationList($event)"
+            (changeEvent)="onChangeOrganization($event)"
+          ></share-organization-combo-box>
+        </div>
+      </div>
+    </div>
+
+    <ng-content select="[condition]"></ng-content>
+  </div>
+</div>
+
+<div class="export-group" id="exportPatternInfo">
+  <div class="export-group__header">出力する項目を指定してください</div>
+  <div class="export-group__body">
+    <div class="export-item pattern-item">
+      <div class="export-item__value">
+        <table class="table table-bordered pattern-table">
+          <thead>
+            <tr>
+              <th class="pattern-column-data">出力情報</th>
+              <th class="pattern-column-pattern">出力パターン</th>
+              <th class="pattern-column-edit"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ _exportInfoName }}</td>
+              <td>
+                <bl-select
+                  [(value)]="_exportPatternCode"
+                  [items]="_exportPatternItems"
+                  [option]="{ valueProperty: 'exportPatternCode', labelProperty: 'exportPatternName' }"
+                  (changeEvent)="onChangeExportPattern($event)"
+                ></bl-select>
+              </td>
+              <td>
+                <button
+                  class="btn btn-default"
+                  (click)="onClickPatternEdit()"
+                >編集</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

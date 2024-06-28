@@ -1,0 +1,145 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.export-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  min-height: 0;
+}
+
+.export-menu {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+
+  &__body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+  }
+  &__bottom {
+    width: 400px;
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid #ccc;
+    padding: 8px 20px;
+
+    &.omit {
+      width: 50px;
+      justify-content: left;
+      padding: 8px 12px;
+    }
+  }
+}
+
+.export-condition {
+  flex: 1 1 auto;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.export-group-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: #EAEAEA;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.export-menu-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: white;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.export-group-item {
+  position: relative;
+  padding: 15px 5px 15px 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #333333;
+  font-weight: bold;
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    right: 20px;
+    display: block;
+    width: 14px;
+    padding-right: 10px;
+    font-family: 'Glyphicons Halflings';
+    content: '\e080';
+    color: #C1C1C1;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px #09f inset;
+  }
+  &:hover {
+    background-color: white;
+  }
+  &.active {
+    background-color: white;
+    &::after {
+      color: #00B125;
+    }
+  }
+}
+
+.export-menu-item {
+  position: relative;
+  padding: 15px 5px 15px 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #333333;
+  font-weight: bold;
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    display: block;
+    width: 0;
+    height: 100%;
+    content: '';
+    background-color: #00B125;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px #09f inset;
+  }
+  &:hover {
+    background-color: #E5F7E9;
+  }
+  &.active {
+    background-color: #E5F7E9;
+    &::after {
+      width: 4px;
+    }
+  }
+}
+
+.menu-slider-arrow {
+  .glyphicon {
+    width: 5px;
+    font-size: 18px;
+    color: gray;
+  }
+}

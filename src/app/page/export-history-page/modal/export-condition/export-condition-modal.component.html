@@ -1,0 +1,15 @@
+<bl-modal-content #content
+  [title]="_title"
+  [footerButtonType]="_footerButtonType"
+  [cancelButtonSetting]="_cancelButtonSetting"
+>
+  <div class="condition-contents" body>
+    <div class="condition-item" *ngFor="let item of _conditionItems">
+      <ng-container *ngIf="item.value">
+        <span class="condition-item__label">{{ item.label }}</span>
+        <span class="condition-item__sep">：</span>
+        <span class="condition-item__value" [innerHTML]="item.value"></span>
+      </ng-container>
+    </div>
+  </div>
+</bl-modal-content>

@@ -1,0 +1,14 @@
+.condition-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  bl-text-input {
+    flex: 1 1 auto;
+  }
+  bl-radio-group {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}

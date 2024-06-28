@@ -1,0 +1,39 @@
+<app-export-report-panel-container #blContainer
+  [reportOutputResult]="reportOutputResult"
+  [pageId]="pageId"
+  [settingDataId]="settingDataId"
+  [reportCondition]="reportCondition"
+  [isShownFavoriteCondition]="true"
+  (loadFavoriteConditionEvent)="onLoadFavoriteCondition($event)"
+  >
+  <div condition>
+    <app-mainte-pack-panel-parts
+      [condition]="maintePackCondition"
+      [conditionShown]="maintePackConditionShown"
+      [mpContractStatusArray]="MPContractStatusArray"
+    >
+    </app-mainte-pack-panel-parts>
+
+    <app-customer-panel-parts
+      [condition]="customerCondition"
+      [conditionShown]="customerConditionShown"
+    >
+    </app-customer-panel-parts>
+
+
+    <div class="export-item">
+      <div class="export-item__label"><span>ソート</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+
+          <bl-select
+            [value]="sortDiv"
+            [items]="SortItems"
+            (changeEvent)="sortDiv=$event"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</app-export-report-panel-container>

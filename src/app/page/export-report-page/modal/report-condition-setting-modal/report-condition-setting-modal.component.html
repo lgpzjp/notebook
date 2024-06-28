@@ -1,0 +1,29 @@
+<bl-modal-content
+  #content
+  [title]="title"
+  [footerButtonType]="ModalButtonType.OkCancel"
+  >
+  <ng-container body>
+    <div class="title-header">
+      <label>よく使う条件を選択してください。</label>
+      <button
+        class="btn btn-default"
+        type="button"
+        [disabled]="!tableData"
+        (click)="onClickOrderButton()">
+        表示順位設定
+      </button>
+    </div>
+    <bl-reference-grid
+      #grid
+      [noRowsMessage]="'保存済みの設定が存在しません。'"
+      [isOperable]="true"
+      [pagination]="false"
+      [gridOptions]="gridOptions"
+      [gridHeight]="'250px'"
+      (onReady)="onReadyGrid()"
+      (selectedRowEvent)="onSelectedRow($event)"
+      >
+    </bl-reference-grid>
+  </ng-container>
+</bl-modal-content>

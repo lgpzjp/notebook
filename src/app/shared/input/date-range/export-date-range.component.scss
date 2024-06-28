@@ -1,0 +1,28 @@
+.date-range {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &__input {
+    width: 300px;
+    margin-right: 5px;
+    margin-bottom: 1px;
+  }
+
+  &__sep {
+    margin-right: 5px;
+    margin-bottom: 1px;
+  }
+
+  &__btn {
+    width: 50px;
+    margin-right: 5px;
+    margin-bottom: 1px;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+

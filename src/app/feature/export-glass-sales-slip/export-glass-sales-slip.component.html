@@ -1,0 +1,149 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="search-condition">
+        <div class="tab-header">
+          出力条件を指定して　出力開始　ボタンをクリックしてください。
+        </div>
+        <div class="tab-body">
+          <div class="row">
+            <div class="col-xs-12 search-condition__contents">
+              <div class="search-icon">
+                <span _ngcontent-c11="" class="icon-icon_search"></span>
+              </div>
+              <div class="big-g-1">
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力内容</label>
+                    <table class="table">
+                      <tr>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.CreditSales"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CreditSales]"
+                            [checked]="exportCondition.creditSales"
+                            (changeEvent)="onChangeSlipExportContentCreditSales($event)">
+                          </bl-checkbox>
+                        </td>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.CreditReturned"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CreditReturned]"
+                            [checked]="exportCondition.creditReturned"
+                            (changeEvent)="onChangeSlipExportContentCreditReturned($event)">
+                          </bl-checkbox>
+                        </td>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.CashSales"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CashSales]"
+                            [checked]="exportCondition.cashSales"
+                            (changeEvent)="onChangeSlipExportContentCashSales($event)">
+                          </bl-checkbox>
+                        </td>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.CashReturned"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CashReturned]"
+                            [checked]="exportCondition.cashReturned"
+                            (changeEvent)="onChangeSlipExportContentCashReturned($event)">
+                          </bl-checkbox>
+                        </td>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.Claim"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.Claim]"
+                            [checked]="exportCondition.claim"
+                            (changeEvent)="onChangeSlipExportContentClaim($event)">
+                          </bl-checkbox>
+                        </td>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.Direction"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.Direction]"
+                            [checked]="exportCondition.direction"
+                            (changeEvent)="onChangeSlipExportContentDirection($event)">
+                          </bl-checkbox>
+                        </td>
+                        <td class="td">
+                          <bl-checkbox
+                            [value]="glassSalesSlipDivScreen.TemporarySave"
+                            [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.TemporarySave]"
+                            [checked]="exportCondition.temporarySave"
+                            (changeEvent)="onChangeSlipExportContentTemporarySave($event)">
+                          </bl-checkbox>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="group-2">
+                    <label>対象期間</label>
+                    <div class="form-group condition-flex">
+                      <div class="small-item-in-g2-dr">
+                        <bl-select
+                          #targetPeriod
+                          [value]="exportCondition.targetPeriod"
+                          [items]="SalesSlipSupplierSelectArray"
+                          [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                          (changeEvent)="onChangeTargetPeriod($event)">
+                        </bl-select>
+                      </div>
+                      <app-date-picker-condition
+                        [startDate]="startDate"
+                        [endDate]="endDate"
+                        [era]="ad"
+                        [displayEndDate]="displayEndDate"
+                        (startDateChange)="onStartDateChange($event)"
+                        (endDateChange)="onEndDateChange($event)">
+                      </app-date-picker-condition>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力タイプ</label>
+                    <div class="form-group condition-flex">
+                      <bl-select
+                        #exportInfoType
+                        [value]="exportCondition.exportInfoType"
+                        [items]="ExportSlipTypeDivArray"
+                        [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                        (valueChange)="onChangeExportInfoType($event)">
+                      </bl-select>
+                    </div>
+                  </div>
+                  <div class="group-1">
+                    <app-range-organization
+                      (guideDisabledEvent)="onGuideDisabledEvent($event)"
+                      (selectInfo)="onSelectInfoEvent($event)"
+                      >
+                    </app-range-organization>
+                  </div>
+                </div>
+              </div>
+              <div class="big-g-2">
+                <button class="btn btn-default" type="button"
+                  (click)="onClickDetailButton()">
+                  <span>詳細条件</span>
+                  <span class="caret"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-detail-glass-sales-slip-condition
+          #detailConditionSalesSlip
+          [detailSalesSlipCondition]="exportCondition"
+          [exportInfoType]="exportCondition.exportInfoType"
+          (clearCondition)="onClearCondition()">
+        </app-detail-glass-sales-slip-condition>
+      </div>
+    </div>
+    <app-export-pattern-selector
+      [tabID]="exportInfoTabDiv.GlassSalesSlip"
+      [(exportCondition)]="exportCondition"
+      [dataExportPatterns]="dataExportPatterns"
+      (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+    </app-export-pattern-selector>
+  </div>
+</div>

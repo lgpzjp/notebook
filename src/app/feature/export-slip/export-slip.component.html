@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="search-condition">
+        <div class="tab-header">
+          出力条件を指定して　出力開始　ボタンをクリックしてください。
+        </div>
+        <div class="tab-body">
+          <div class="row">
+            <div class="col-xs-12 search-condition__contents">
+              <div class="search-icon">
+                <span _ngcontent-c11="" class="icon-icon_search"></span>
+              </div>
+              <div class="big-g-1">
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力内容</label>
+                    <div class="form-group condition-flex">
+                      <bl-checkbox
+                        [value]="slipKind.EstimatesSlip"
+                        [label]="slipKindLabel.Quotation"
+                        [checked]="exportCondition.slipKindQuotation"
+                        (changeEvent)="onChangeSlipKindQuotation($event)">
+                      </bl-checkbox>
+                      <bl-checkbox
+                        [value]="slipKind.SalesOrderSlip"
+                        [label]="slipKindLabel.Directions"
+                        [checked]="exportCondition.slipKindDirections"
+                        (changeEvent)="onChangeSlipKindDirections($event)">
+                      </bl-checkbox>
+                      <bl-checkbox
+                        [value]="slipKind.SalesSlip"
+                        [label]="slipKindLabel.Invoice"
+                        [checked]="exportCondition.invoice"
+                        (changeEvent)="onChangeSlipKindInvoice($event)">
+                      </bl-checkbox>
+                    </div>
+                  </div>
+                  <div class="group-2">
+                    <label>対象期間</label>
+                    <div class="form-group condition-flex">
+                      <div class="small-item-in-g2-dr">
+                        <bl-select
+                          #targetPeriod
+                          [(value)]="exportCondition.targetPeriod"
+                          [items]="targetPeriodItems"
+                          (changeEvent)="onChangeTargetPeriod($event)">
+                        </bl-select>
+                      </div>
+                      <app-date-picker-condition
+                        (startDateChange)="onStartDateChange($event)"
+                        (endDateChange)="onEndDateChange($event)">
+                      </app-date-picker-condition>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力タイプ</label>
+                    <div class="form-group condition-flex">
+                      <bl-select
+                        #exportInfoType
+                        [(value)]="exportCondition.exportInfoType"
+                        [items]="exportInfoTypeItems"
+                        (valueChange)="onChangeExportInfoType($event)">
+                      </bl-select>
+                    </div>
+                  </div>
+                  <div class="group-1 group-1--salse-recorded-organization">
+                    <label>管理組織</label>
+                    <div class="form-group condition-flex">
+                      <bl-select
+                        [(value)]="exportCondition.salseRecordedOrganization"
+                        [items]="salseRecordedOrganizationItems"
+                      ></bl-select>
+                    </div>
+                  </div>
+                  <div class="group-1 group-1--organization">
+                    <label>&nbsp;</label>
+                    <div class="form-group condition-flex">
+                      <share-organization-combo-box
+                        [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                        [(value)]="selectedOrganizationCode"
+                        (changeEvent)="onChangeSlipMgtStdOrgCode($event)"
+                      ></share-organization-combo-box>
+                    </div>
+                  </div>
+                  <div *ngIf="systemItems" class="group-1">
+                    <label>業務</label>
+                    <div class="form-group condition-flex">
+                      <bl-select
+                        [value]="_productCode"
+                        [items]="systemItems"
+                        [disabled]="systemItems.length < 2"
+                        [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                        (changeEvent)="onChangeSystem($event)"
+                      ></bl-select>
+                    </div>
+                  </div>
+              </div>
+              </div>
+              <div class="big-g-2">
+                <button class="btn btn-default" type="button"
+                  (click)="onPanelShown()">
+                  <span>詳細条件</span>
+                  <span class="caret"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-detail-slip-condition
+          #detailConditionSlip
+          [condition]="exportCondition"
+          (changeExportCustomerVehicleEvent)="onChangeExportCustomerVehicleOption($event)"
+          (clearCondition)="onClickClearCondition()">
+        </app-detail-slip-condition>
+      </div>
+    </div>
+    <app-export-pattern-selector
+      [tabID]="'2'"
+      [(exportCondition)]="exportCondition"
+      [dataExportPatterns]="dataExportPatterns"
+      (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+    </app-export-pattern-selector>
+  </div>
+</div>

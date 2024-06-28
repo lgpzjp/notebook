@@ -1,0 +1,33 @@
+.export-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  &__label {
+    width: 185px;
+    min-width: 185px;
+    display: flex;
+    align-items: center;
+  }
+  &__value {
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    .single-input {
+      width: 300px;
+    }
+
+    .glass-input {
+      width: 88px;
+      padding-right: 5px;
+    }
+  }
+}
+.td {
+  padding-right: 10px;
+}
+.condition-label {
+  display: flex;
+  align-items: center;
+}

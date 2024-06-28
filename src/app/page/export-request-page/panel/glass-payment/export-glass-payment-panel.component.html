@@ -1,0 +1,77 @@
+<app-export-panel-container
+  #blContainer
+  [exportInfoTabDiv]="exportInfoTabDiv"
+  [exportInfoDiv]="exportInfoDiv">
+  <div condition>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力内容</span></div>
+      <div class="export-item__value">
+        <div class="glass-input">
+          <bl-select
+            #exportInfoType
+            [value]="_condition && _condition.exportInfoType"
+            [items]="ExportPaymentDivArray"
+            [disabled]="ExportPaymentDivArray.length <= 1"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (valueChange)="onChangeExportInfoType($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>対象期間</span></div>
+      <div class="export-item__value">
+        <app-export-date-range
+          #targetPeriodDateRange
+          [(startValue)]="_condition && _condition.startDate"
+          [(endValue)]="_condition && _condition.endDate">
+        </app-export-date-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>管理組織</span></div>
+      <div class="export-item__value">
+        <app-range-organization
+          (guideDisabledEvent)="onGuideDisabledEvent($event)"
+          (selectInfo)="onSelectInfoEvent($event)">
+        </app-range-organization>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>ヘッダ行</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select #outPutHeaderDiv
+            [value]="_condition && _condition.outPutHeaderDiv"
+            [items]="OutputDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeOutPutHeaderDiv($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>順序</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select #outPutOrderDiv
+            [value]="_condition && _condition.glassOutPutPurchaseOrderDiv"
+            [items]="ExportOrderDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeOutPutOrderDiv($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>締日</span></div>
+      <div class="export-item__value">
+        <bl-number-input style="width: 88px;"
+          [(value)]="_condition && _condition.cutoffDay"
+          [option]="{ max: 31 }">
+        </bl-number-input>
+        <span class="condition-label">&nbsp;&nbsp;日</span>
+      </div>
+    </div>
+  </div>
+</app-export-panel-container>

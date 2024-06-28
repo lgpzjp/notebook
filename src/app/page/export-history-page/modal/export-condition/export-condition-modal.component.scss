@@ -1,0 +1,20 @@
+.condition-contents {
+  padding: 10px;
+}
+
+.condition-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+
+  &__label {
+    width: 150px;
+  }
+  &__sep {
+    width: 30px;
+    text-align: center;
+  }
+  &__value {
+    flex: 1;
+  }
+}

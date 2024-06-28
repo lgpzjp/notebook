@@ -1,0 +1,32 @@
+.v-small-item-in-g2 {
+  width: 3%;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  padding: 0 3px;
+  float: left;
+}
+.small-item-in-g2 {
+  width: 12%;
+  padding: 0!important;
+  float: left;
+}
+.small-item-in-g2 button {
+  width: 100%;
+}
+.big-item-in-g2_l, .big-item-in-g2_r {
+  width: 36%;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+  position: relative;
+  min-height: 1px;
+}
+
+.big-item-in-g2_l {
+  padding:  0 0 0 5px!important;
+}
+
+.big-item-in-g2_r {
+  padding:  0 5px 0 0!important;
+}

@@ -1,0 +1,87 @@
+
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-1">
+            <label>支払先コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailDebtCondition.payeeCodeS"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="9"
+                (changeEvent)="onChangePayeeCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailDebtCondition.payeeCodeE"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="9"
+                (changeEvent)="onChangePayeeCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="group-1">
+            <label>支払先カナ</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailDebtCondition.payeeNameKanaS"
+                [maxlength]="50"
+                [option]="{ convertKana: true, allows: ['katakana', 'alphabet', 'number', 'symbol'] }"
+                (changeEvent)="onChangePayeeNameKana($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailDebtCondition.payeeNameKanaE"
+                [maxlength]="50"
+                [option]="{ convertKana: true, allows: ['katakana', 'alphabet', 'number', 'symbol'] }"
+                (changeEvent)="onChangePayeeNameKana($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit">
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button" (click)="onClickClearButton()">
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<!--管理組織-->
+<div class="flex">
+  <div>
+    <bl-select
+      [value]="selectObject.selectType"
+      [items]="selectTypeArray"
+      (changeEvent)="onSelectChangeEvent($event)"
+    ></bl-select>
+  </div>
+  <div class="flex form-input">
+    <span class="spacer">:</span>
+    <!-- 範囲指定のみ -->
+    <div *ngIf="selectObject.selectType === SelectTypeEnum.RANGE" class="flex">
+      <div class="input-group">
+        <bl-text-input
+          #organizationCodeFromInput
+          [id]="'organizationFrom'"
+          [value]="selectObject.organizationCodeFrom"
+          [maxlength]="6"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          (focusEvent)="onFocus($event, organizationCodeFromInput)"
+          (blurEvent)="onBlur($event)"
+          (changeEvent)="onChangeOrganizationCodeEvent($event, 1)"
+        >
+        </bl-text-input>
+        <span class="input-group-btn">
+          <button
+            #organizationCodeFromButton
+            class="btn btn-default"
+            type="button"
+            [id]="'organizationFrom'"
+            (click)="onClickOrganizationGuide(organizationCodeFromButton, selectObject.organizationCodeFrom)"
+            (focus)="onFocus($event, organizationCodeFromButton)"
+            (blur)="onBlur($event)"
+          >
+            <span class="icon-icon_guide glyphicon"></span>
+          </button>
+        </span>
+      </div>
+      <div class="spacer">
+        <span>～</span>
+      </div>
+      <div class="input-group">
+        <bl-text-input
+          #organizationCodeToInput
+          [id]="'organizationTo'"
+          [value]="selectObject.organizationCodeTo"
+          [maxlength]="6"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          (focusEvent)="onFocus($event, organizationCodeToInput)"
+          (blurEvent)="onBlur($event)"
+          (changeEvent)="onChangeOrganizationCodeEvent($event, 2)"
+        >
+        </bl-text-input>
+        <span class="input-group-btn">
+          <button
+          #organizationCodeToButton
+            class="btn btn-default"
+            type="button"
+            [id]="'organizationTo'"
+            (click)="onClickOrganizationGuide(organizationCodeToButton, selectObject.organizationCodeTo)"
+            (focus)="onFocus($event, organizationCodeToButton)"
+            (blur)="onBlur($event)"
+          >
+            <span class="icon-icon_guide glyphicon"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <!-- 個別指定 -->
+    <div *ngIf="selectObject.selectType === SelectTypeEnum.INDIVIDUAL" class="flex form-input_range">
+      <ng-container *ngFor="let value of selectObject.organizationList; index as index; trackBy: trackByIndex">
+        <div>
+        <bl-code-input
+          #organizationListInput
+          [id]="index"
+          [value]="selectObject.organizationList[index]"
+          [align]="'left'"
+          [resource]="organizationResource"
+          [option]="{
+            enableBlank: true,
+            valueProperty: 'organizationCode',
+            textInputOption: { allows: ['number'], convertHalf: true }
+          }"
+          (focusEvent)="onFocus($event, organizationListInput)"
+          (blurEvent)="onBlur($event)"
+          (beginSearchEvent)="onBeginSearchOrgCodeEvent($event)"
+          (afterSearchEvent)="onAfterSearchOrgCodeEvent($event, index)"
+        >
+        </bl-code-input>
+      </div>
+      </ng-container>
+      <span class="input-group-btn">
+        <button
+          #organizationButton
+          blCustomFocus
+          [id]="'organizationButton'"
+          class="btn btn-default form-btn"
+          (focus)="onFocus($event, organizationButton)"
+          (blur)="onBlur($event)"
+          (click)="onClickOrganizationListGuide(organizationButton)"
+        >
+          <span class="icon-icon_guide"></span>
+        </button>
+      </span>
+    </div>
+
+    <!-- 個別指定 -->
+
+    <!-- 全組織 -->
+    <div *ngIf="selectObject.selectType === SelectTypeEnum.ALL_ORGANAIZATION"></div>
+    <!-- 全組織 -->
+  </div>
+  <!-- 範囲指定 -->
+</div>

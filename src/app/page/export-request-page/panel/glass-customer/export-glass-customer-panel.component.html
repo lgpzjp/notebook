@@ -1,0 +1,126 @@
+<app-export-panel-container
+  #blContainer
+  [exportInfoTabDiv]="exportInfoTabDiv"
+  [exportInfoDiv]="exportInfoDiv"
+>
+  <div condition>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力内容</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [(value)]="_condition.customerExportContent"
+            [items]="ExportCustomerDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>対象期間</span></div>
+      <div class="export-item__value">
+        <app-export-date-range
+          #salesDateRange
+          [(startValue)]="_condition && _condition.dataExportTargetPeriodStDate"
+          [(endValue)]="_condition && _condition.dataExportTargetPeriodEdDate"
+        ></app-export-date-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>管理組織</span></div>
+      <div class="export-item__value">
+        <app-range-organization
+          (guideDisabledEvent)="onGuideDisabledEvent($event)"
+          (selectInfo)="onSelectInfoEvent($event)"
+          >
+        </app-range-organization>
+      </div>
+    </div>
+
+    <div class="export-item">
+      <div class="export-item__label"><span>顧客コード</span></div>
+      <span class="input-form__half">
+        <span class="input-form__code input_code">
+          <bl-number-input
+            #customerCodeStart
+            [value]="_condition && _condition.customerCodeStart"
+            [option]="{ intLength: 9, displayZero: false, convertHalf: true }"
+            [align]="'left'"
+            (focusEvent)="onFocusEvent(customerCodeStartGuideBtn)"
+            (blurEvent)="onBlurEvent()"
+            (changeEvent)="onChangeCustomerCodeEvent($event, 'customerCodeStart', 1)"
+          ></bl-number-input>
+        </span>
+        <span class="input-form__name">
+          <div class="input-group">
+            <span disabled class="form-control">{{ _condition.customerNameStart }}</span>
+            <div class="input-group-btn">
+              <button #customerCodeStartGuideBtn
+                class="btn btn-default"
+                type="button"
+                (focus)="onFocusEvent(customerCodeStartGuideBtn)"
+                (blur)="onBlurEvent()"
+                (click)="onClickCustomerCodeGuideEvent(1)"
+              >
+                <span class="icon-icon_guide"></span>
+              </button>
+            </div>
+          </div>
+        </span>
+      </span>
+      <span class="input-form__sep">～</span>
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-number-input
+              [value]="_condition && _condition.customerCodeEnd"
+              [option]="{ intLength: 9, displayZero: false, convertHalf: true }"
+              [align]="'left'"
+              (focusEvent)="onFocusEvent(customerCodeEndGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeCustomerCodeEvent($event, 'customerCodeEnd', 2)"
+            ></bl-number-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ _condition.customerNameEnd }}</span>
+              <div class="input-group-btn">
+                <button #customerCodeEndGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  (focus)="onFocusEvent(customerCodeEndGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickCustomerCodeGuideEvent(2)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>締日</span></div>
+      <div class="export-item__value">
+        <bl-number-input style="width: 84px;"
+          [(value)]="_condition.cutoffDay"
+          [option]="{ min: 1, max: 31 }"
+          >
+        </bl-number-input>
+        <span class="cutoffDay-label">&nbsp;&nbsp;日</span>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>ヘッダ行</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [value]="_condition.outPutHeaderDiv"
+            [items]="OutputDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeOutPutHeaderDiv($event)"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-export-panel-container>

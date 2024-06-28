@@ -1,0 +1,64 @@
+<div blFocusCheck
+  class="text-range"
+  (blurEvent)="onBlur()"
+>
+  <div class="text-range__input">
+    <span class="input-group-text">
+      <bl-text-input blCustomFocus
+        #startTextInput
+        [(value)]="_startValue"
+        [option]="option"
+        [maxlength]="maxlength"
+        [align]="align"
+        [disabled]="disabled"
+        [enter]="_endFocusFunction"
+        (focusEvent)="focusEvent.emit(startGuideBtn)"
+        (blurEvent)="blurEvent.emit(startGuideBtn)"
+        (changeEvent)="onChangeStartValue($event)"
+      ></bl-text-input>
+    </span>
+    <span class="input-group-guide">
+      <button
+        #startGuideBtn
+        class="btn btn-default guide-btn"
+        (focus)="focusEvent.emit(startGuideBtn)"
+        (blur)="blurEvent.emit(startGuideBtn)"
+        (click)="clickStartGuideEvent.emit(startGuideBtn)"
+      >
+        <span class="icon-icon_guide"></span>
+      </button>
+    </span>
+  </div>
+
+  <div class="text-range__sep">～</div>
+
+  <div class="text-range__input">
+    <span class="input-group-text">
+      <bl-text-input blCustomFocus
+        #endTextInput
+        [id]="'endTextInput'"
+        [(value)]="_endValue"
+        [option]="option"
+        [maxlength]="maxlength"
+        [align]="align"
+        [disabled]="disabled"
+        [enter]="_nextFocusFunction"
+        (focusEvent)="focusEvent.emit(endGuideBtn)"
+        (blurEvent)="blurEvent.emit(endGuideBtn)"
+        (changeEvent)="onChangeEndValue($event)"
+      ></bl-text-input>
+    </span>
+    <span class="input-group-guide">
+      <button
+        #endGuideBtn
+        class="btn btn-default guide-btn"
+        (focus)="focusEvent.emit(endGuideBtn)"
+        (blur)="blurEvent.emit(endGuideBtn)"
+        (click)="clickEndGuideEvent.emit(endGuideBtn)"
+      >
+        <span class="icon-icon_guide"></span>
+      </button>
+    </span>
+  </div>
+
+</div>

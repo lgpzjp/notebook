@@ -1,0 +1,34 @@
+:host {
+  ::ng-deep {
+    .bl-text-input {
+      width: 100px !important;
+    }
+  }
+
+  .title {
+    margin-bottom: 5px;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .form {
+    &-input {
+      align-items: flex-end;
+      margin-bottom: -2px;
+      &_range {
+        width: 550px;
+        flex-wrap: wrap;
+      }
+    }
+
+    &-btn {
+      margin-left: -4px;
+    }
+  }
+
+  .spacer {
+    margin: 6px;
+  }
+}

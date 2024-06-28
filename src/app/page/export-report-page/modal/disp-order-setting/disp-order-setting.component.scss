@@ -1,0 +1,21 @@
+$border: 1px solid #999;
+
+.sortable-wrap {
+  border: $border;
+  max-height: calc(100vh - 284px);
+  overflow-y: auto;
+}
+
+::ng-deep {
+  .sortable-group-item {
+    border-right: $border;
+    &:not(:last-child) {
+      border-bottom: $border;
+    }
+  }
+
+  .sortable-placeholder {
+    padding: 20px;
+    text-align: center;
+  }
+}

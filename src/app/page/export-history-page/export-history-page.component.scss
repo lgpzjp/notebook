@@ -1,0 +1,80 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  ::ng-deep {
+    .search-condition__btn {
+      border: none !important;
+    }
+  }
+}
+
+.basic-condition {
+  border-left: 1px solid #adadad;
+}
+
+.basic-row {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.basic-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 6px;
+  padding-right: 6px;
+
+  &:not(:last-child) {
+    border-right: 1px solid #adadad;
+  }
+}
+
+.date-range {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+
+  &__input {
+    width: 330px;
+  }
+  &__sep {
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+  }
+}
+
+.grid-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 0px 20px;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-bottom: 5px;
+  }
+  &__body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+bl-reference-grid {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  ::ng-deep {
+    .reference-grid {
+      flex: 1 1 auto;
+    }
+  }
+}

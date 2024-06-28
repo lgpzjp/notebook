@@ -1,0 +1,57 @@
+
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-1">
+            <label>得意先コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailCondition.customerCodeStart"
+                [maxlength]="9"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                (changeEvent)="onChangeCustomerCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex label-items">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailCondition.customerCodeEnd"
+                [maxlength]="9"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                (changeEvent)="onChangeCustomerCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit" detail-customer-slip-condition-footer>
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button" (click)="onClickClearButton()">
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

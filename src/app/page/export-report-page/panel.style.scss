@@ -1,0 +1,33 @@
+.export-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  &__label {
+    width: 185px;
+    min-width: 185px;
+    display: flex;
+    align-items: center;
+  }
+  &__value {
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .single-input {
+      width: 300px;
+    }
+    .range-input {
+      width: 630px;
+    }
+    .multi-input {
+      display: flex;
+      // range-inputと幅を合わせるよう調整
+      gap: 24px;
+      & > div {
+        width: 300px;
+      }
+    }
+  }
+}

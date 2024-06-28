@@ -1,0 +1,78 @@
+<bl-tab-container #blTabContainer
+  [class]="'step-tab'"
+  [items]="tabitems">
+
+  <div id="tabCondition" class="tab-pane" [blTabContainer]="blTabContainer">
+    <div class="export-condition">
+      <div *ngIf="isShownFavoriteCondition" class="export-group">
+        <div class="export-group__header">よく使う条件の選択や保存ができます</div>
+        <div class="export-group__body">
+          <div class="export-item favorite-condition">
+            <div class="left">
+              <button
+                class="btn btn-success"
+                type="button"
+                (click)="onClickLoadFavoriteCondition()"
+              >
+                よく使う条件
+              </button>
+              <span>{{selectedFavoriteConditionName ? "選択中の条件：" + selectedFavoriteConditionName : ''}}</span>
+            </div>
+            <div class="right">
+              <button
+                class="btn btn-default"
+                type="button"
+                [disabled]="!selectedAccountGenericSettingSubID"
+                (click)="onClickUpdateFavoriteCondition()"
+              >
+                よく使う条件を更新
+              </button>
+              <button
+                class="btn btn-default"
+                type="button"
+                (click)="onClickSaveFavoriteCondition()"
+              >
+                よく使う条件を追加
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="export-group">
+        <div class="export-group__header">出力する条件を指定してください</div>
+        <div class="export-group__body">
+          <div
+            class="export-item organization-item"
+          >
+            <div class="export-item__label"><span>組織</span></div>
+            <div class="export-item__value">
+              <div class="single-input">
+                <bl-multi-select
+                  [values]="_organizationCodeList"
+                  [items]="organizationItems"
+                  [placeholder]="'組織を選択してください'"
+                  (changeItemsEvent)="onChangeOrganizationItems($event)"
+                >
+                </bl-multi-select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 個別検索条件 -->
+          <ng-content select="[condition]"></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tabPreview" class="tab-pane" [blTabContainer]="blTabContainer">
+    <object *ngIf="isDesktop" #preview class="object-content"></object>
+    <pdf-viewer
+      *ngIf="!isDesktop"
+      [src]="reportOutputResult && reportOutputResult.reportFileUrl"
+      style="display: block;"
+      [render-text]="true">
+    </pdf-viewer>
+  </div>
+</bl-tab-container>

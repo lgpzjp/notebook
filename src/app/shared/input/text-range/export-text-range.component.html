@@ -1,0 +1,32 @@
+<div blFocusCheck
+  class="text-range"
+  (blurEvent)="onBlur()"
+>
+  <div class="text-range__input">
+    <bl-text-input
+      #startTextInput
+      [(value)]="_startValue"
+      [option]="option"
+      [maxlength]="maxlength"
+      [align]="align"
+      [disabled]="disabled"
+      (changeEvent)="onChangeStartValue($event)"
+    ></bl-text-input>
+  </div>
+
+  <div class="text-range__sep">～</div>
+
+  <div class="text-range__input">
+    <bl-text-input blCustomFocus
+      #endTextInput
+      [(value)]="_endValue"
+      [option]="option"
+      [maxlength]="maxlength"
+      [align]="align"
+      [disabled]="disabled"
+      [enter]="_nextFocusFunction"
+      (changeEvent)="onChangeEndValue($event)"
+    ></bl-text-input>
+  </div>
+
+</div>

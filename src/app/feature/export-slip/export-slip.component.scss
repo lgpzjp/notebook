@@ -1,0 +1,44 @@
+.search-condition__contents {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.checkbox {
+  margin-top: 0px !important;
+}
+.option-body {
+  padding-bottom: 25px !important;
+}
+.search-condition {
+  width: 100vh;
+  margin: 0 auto;
+}
+.tab-body {
+  background-color: #d5d5d5;
+  padding: 15px 0;
+}
+.tab-header,
+.tab-body,
+.tab-submit,
+.search-condition {
+  min-width: 1215px;
+}
+
+.tab-header {
+  background: #f5f5f5;
+  padding: 7px 10px;
+  margin-top: 15px;
+  font-weight: 600;
+  border-top: 6px solid #00af84;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.small-item-in-g2-dr {
+  width: 13%;
+  padding: 0 5px 0 0;
+}

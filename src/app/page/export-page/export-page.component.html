@@ -1,0 +1,208 @@
+<div class="navbar">
+  <div class="navbar__title">
+    <span>
+      {{ title }}
+    </span>
+  </div>
+</div>
+<div id="export" *ngIf="isLoaded">
+  <bl-tab-container #tabContainer
+    [items]="tabList"
+    (changeEvent)="initFunction($event.tabId)">
+    <div id="exportCustomerVehicleTabInfo" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="showDefaultTab">
+      <ng-container *ngIf="targetPageId===PageId.ExportCustomerVehicle" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-customer-vehicle
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-customer-vehicle>
+    </div>
+    <div id="exportSlipTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="showDefaultTab">
+      <ng-container *ngIf="targetPageId===PageId.ExportSlip" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-slip
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-slip>
+    </div>
+    <div id="exportTabHistory" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="showDefaultTab">
+      <ng-container *ngIf="targetPageId===PageId.ExportHistory" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-history
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-history>
+    </div>
+    <div id="exportSalesSlipTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman || productCode === ProductCode.Recycle">
+      <ng-container *ngIf="targetPageId===PageId.ExportSalesSlip" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-sales-slip
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-sales-slip>
+    </div>
+    <div id="exportCreditTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman || productCode === ProductCode.Recycle">
+      <ng-container *ngIf="targetPageId===PageId.ExportCredit" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-credit
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-credit>
+    </div>
+    <div id="exportTabPurchaseSlip" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman || productCode === ProductCode.Recycle">
+      <ng-container *ngIf="targetPageId===PageId.ExportPurchaseSlip" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-purchase-slip
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-purchase-slip>
+    </div>
+    <div id="exportDebtTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman || productCode === ProductCode.Recycle">
+      <ng-container *ngIf="targetPageId===PageId.ExportDebt" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-debt
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-debt>
+    </div>
+    <div id="exportTabStockMoveSlip" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman">
+      <ng-container *ngIf="targetPageId===PageId.ExportStockMoveSlip" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-stock-move-slip
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-stock-move-slip>
+    </div>
+    <div id="exportTabCustomerSlip" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman">
+      <ng-container *ngIf="targetPageId===PageId.ExportCustomer" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-customer-slip
+        [dataExportPatterns]="dataExportPatterns"
+        [productCode]="productCode"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-customer-slip>
+    </div>
+    <div id="exportTabVehicleMgt" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman">
+      <ng-container *ngIf="targetPageId===PageId.ExportVehicleMgt" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-vehicle-mgt
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-vehicle-mgt>
+    </div>
+    <div id="exportStockTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Partsman">
+      <ng-container *ngIf="targetPageId===PageId.ExportStock" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-stock
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-stock>
+    </div>
+    <div id="exportGlassSalesSlipTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Glass">
+      <ng-container *ngIf="targetPageId===PageId.GlassExportSales" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-glass-sales-slip
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        [webSocketConnected]="webSocketConnected"
+        (guideDisabledEvent)="onGuideDisabledEvent($event)"
+        (changeWebSocketConnected)="onChangeWebSocketConnected($event)"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)"
+        >
+      </app-export-glass-sales-slip>
+    </div>
+    <div id="exportGlassDepositTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Glass">
+      <ng-container *ngIf="targetPageId===PageId.GlassExportDeposit" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-glass-deposit
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        [webSocketConnected]="webSocketConnected"
+        (guideDisabledEvent)="onGuideDisabledEvent($event)"
+        (changeWebSocketConnected)="onChangeWebSocketConnected($event)"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)"
+        >
+      </app-export-glass-deposit>
+    </div>
+    <div id="exportGlassCustomerTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Glass">
+      <ng-container *ngIf="targetPageId===PageId.GlassExportSuppliers" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-glass-customer
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        [webSocketConnected]="webSocketConnected"
+        (guideDisabledEvent)="onGuideDisabledEvent($event)"
+        (changeWebSocketConnected)="onChangeWebSocketConnected($event)"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)"
+        >
+      </app-export-glass-customer>
+    </div>
+    <div id="exportRecycleCustomerTab" class="tab-pane"
+      [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Recycle">
+      <ng-container *ngIf="targetPageId===PageId.ExportCustomer" shareDeviceSession
+        [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-recycle-customer
+        [dataExportPatterns]="dataExportPatterns"
+        [systemItems]="systemItems"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-recycle-customer>
+    </div>
+    <div id="exportGlassSettingInfoTab" class="tab-pane"
+         [blTabContainer]="tabContainer" *ngIf="productCode === ProductCode.Glass">
+      <ng-container *ngIf="targetPageId===PageId.GlassExportSettingInfo" shareDeviceSession
+                    [pageId]="targetPageId" [privilege]="false"
+      ></ng-container>
+      <app-export-glass-setting-info
+        [webSocketConnected]="webSocketConnected"
+        (changeWebSocketConnected)="onChangeWebSocketConnected($event)"
+      >
+      </app-export-glass-setting-info>
+    </div>
+  </bl-tab-container>
+</div>

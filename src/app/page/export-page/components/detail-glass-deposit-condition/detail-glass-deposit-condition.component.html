@@ -1,0 +1,62 @@
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-1">
+            <label>ヘッダ行</label>
+            <div class="form-group condition-flex">
+              <bl-select
+                [value]="detailDepositCondition.outPutHeaderDiv"
+                [items]="OutputDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeOutPutHeaderDiv($event)">
+              </bl-select>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>順序</label>
+            <div class="form-group condition-flex">
+              <bl-select
+                [value]="detailDepositCondition.outPutOrderDiv"
+                [items]="ExportOrderDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeOutPutOrderDiv($event)">
+              </bl-select>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>締日</label>
+            <div class="form-group condition-flex group-0">
+              <bl-number-input
+                [(value)]="detailDepositCondition.cutoffDay"
+                [option]="{ min: 1, max: 31 }"
+                >
+              </bl-number-input>
+              <label class="condition-label">&nbsp;&nbsp;日</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit" detail-slip-condition-footer>
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button"
+          (click)="onClickClearButton()"
+        >
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
