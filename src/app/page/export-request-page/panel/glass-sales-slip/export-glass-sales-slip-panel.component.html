@@ -1,0 +1,430 @@
+<app-export-panel-container
+  #blContainer
+  [exportInfoTabDiv]="exportInfoTabDiv"
+  [exportInfoDiv]="exportInfoDiv">
+  <div condition>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力内容</span></div>
+      <div class="export-item__value">
+        <table>
+          <tr>
+            <td class="td">
+              <bl-checkbox #creditSales
+                [value]="glassSalesSlipDivScreen.CreditSales"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CreditSales]"
+                [checked]="_condition.creditSales"
+                (changeEvent)="onChangeSlipExportContentCreditSales($event)">
+              </bl-checkbox>
+            </td>
+            <td class="td">
+              <bl-checkbox
+                [value]="glassSalesSlipDivScreen.CreditReturned"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CreditReturned]"
+                [checked]="_condition.creditReturned"
+                (changeEvent)="onChangeSlipExportContentCreditReturned($event)">
+              </bl-checkbox>
+            </td>
+            <td class="td">
+              <bl-checkbox
+                [value]="glassSalesSlipDivScreen.CashSales"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CashSales]"
+                [checked]="_condition.cashSales"
+                (changeEvent)="onChangeSlipExportContentCashSales($event)">
+              </bl-checkbox>
+            </td>
+            <td class="td">
+              <bl-checkbox
+                [value]="glassSalesSlipDivScreen.CashReturned"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.CashReturned]"
+                [checked]="_condition.cashReturned"
+                (changeEvent)="onChangeSlipExportContentCashReturned($event)">
+              </bl-checkbox>
+            </td>
+            <td class="td">
+              <bl-checkbox
+                [value]="glassSalesSlipDivScreen.Claim"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.Claim]"
+                [checked]="_condition.claim"
+                (changeEvent)="onChangeSlipExportContentClaim($event)">
+              </bl-checkbox>
+            </td>
+            <td class="td">
+              <bl-checkbox
+                [value]="glassSalesSlipDivScreen.Direction"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.Direction]"
+                [checked]="_condition.direction"
+                (changeEvent)="onChangeSlipExportContentDirection($event)">
+              </bl-checkbox>
+            </td>
+            <td class="td">
+              <bl-checkbox
+                [value]="glassSalesSlipDivScreen.TemporarySave"
+                [label]="glassSalesSlipDivScreenMap[glassSalesSlipDivScreen.TemporarySave]"
+                [checked]="_condition.temporarySave"
+                (changeEvent)="onChangeSlipExportContentTemporarySave($event)">
+              </bl-checkbox>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>対象期間</span></div>
+      <div class="export-item__value">
+        <div class="glass-input">
+          <bl-select
+            #targetPeriod
+            [value]="_condition && _condition.targetPeriod"
+            [items]="SalesSlipSupplierSelectArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeTargetPeriod($event)">
+          </bl-select>
+        </div>
+        <app-export-date-range
+          #targetPeriodDateRange
+          [(startValue)]="_condition && _condition.startDate"
+          [(endValue)]="_condition && _condition.endDate"
+          [styles]="{width: '256px'}">
+        </app-export-date-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力タイプ</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select #exportInfoType
+            [value]="_condition && _condition.exportInfoType"
+            [items]="ExportSlipTypeDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (valueChange)="onChangeExportInfoType($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>管理組織</span></div>
+      <div class="export-item__value">
+        <app-range-organization
+          (guideDisabledEvent)="onGuideDisabledEvent($event)"
+          (selectInfo)="onSelectInfoEvent($event)">
+        </app-range-organization>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>得意先コード</span></div>
+      <div class="export-item__value">
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-number-input
+              #customerCodeStart
+              [value]="_condition && _condition.customerCodeS"
+              [option]="{ intLength: 9, displayZero: false, convertHalf: true }"
+              [align]="'left'"
+              (focusEvent)="onFocusEvent(customerCodeStartGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeCustomerCodeEvent($event, 'customerCodeS', 1)"
+            ></bl-number-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ customerNameStart }}</span>
+              <div class="input-group-btn">
+                <button #customerCodeStartGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  (focus)="onFocusEvent(customerCodeStartGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickCustomerCodeGuideEvent(1)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+        <span class="input-form__sep">～</span>
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-number-input
+              [value]="_condition && _condition.customerCodeE"
+              [option]="{ intLength: 9, displayZero: false, convertHalf: true }"
+              [align]="'left'"
+              (focusEvent)="onFocusEvent(customerCodeEndGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeCustomerCodeEvent($event, 'customerCodeE', 2)"
+            ></bl-number-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ customerNameEnd }}</span>
+              <div class="input-group-btn">
+                <button #customerCodeEndGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  (focus)="onFocusEvent(customerCodeEndGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickCustomerCodeGuideEvent(2)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>担当者コード</span></div>
+      <div class="export-item__value">
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-text-input
+              #picEmployeeCodeStart
+              [value]="_condition && _condition.picEmployeeCodeS"
+              [option]="{ allows: ['number'], convertHalf: true, paddingLeft: '0' }"
+              [maxlength]="5"
+              [align]="'left'"
+              (focusEvent)="onFocusEvent(picEmployeeCodeStartGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeEmployeeCodeEvent($event, 'picEmployeeCodeS', 1)"
+            ></bl-text-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ picEmployeeNameStart }}</span>
+              <div class="input-group-btn">
+                <button #picEmployeeCodeStartGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  (focus)="onFocusEvent(picEmployeeCodeStartGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickEmployeeCodeGuideEvent(1)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+        <span class="input-form__sep">～</span>
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-text-input
+              [value]="_condition && _condition.picEmployeeCodeE"
+              [option]="{ allows: ['number'], convertHalf: true, paddingLeft: '0' }"
+              [maxlength]="5"
+              [align]="'left'"
+              (focusEvent)="onFocusEvent(picEmployeeCodeEndGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeEmployeeCodeEvent($event, 'picEmployeeCodeE', 2)"
+            ></bl-text-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ picEmployeeNameEnd }}</span>
+              <div class="input-group-btn">
+                <button #picEmployeeCodeEndGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  (focus)="onFocusEvent(picEmployeeCodeEndGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickEmployeeCodeGuideEvent(2)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>業種コード</span></div>
+      <div class="export-item__value">
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-text-input
+              #businessCodeStart
+              [value]="_condition && _condition.dispBusinessCodeS"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [align]="'left'"
+              [maxlength]="4"
+              [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+              (focusEvent)="onFocusEvent(businessCodeStartGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeDivisionCodeEvent($event, 'dispBusinessCodeS', 1)"
+            ></bl-text-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ dispBusinessNameStart }}</span>
+              <div class="input-group-btn">
+                <button #businessCodeStartGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                  (focus)="onFocusEvent(businessCodeStartGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickUserGuideEvent(1)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+        <span class="input-form__sep">～</span>
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-text-input
+              [value]="_condition && _condition.dispBusinessCodeE"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [align]="'left'"
+              [maxlength]="4"
+              [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+              (focusEvent)="onFocusEvent(businessCodeEndGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeDivisionCodeEvent($event, 'dispBusinessCodeE', 2)"
+            ></bl-text-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ dispBusinessNameEnd }}</span>
+              <div class="input-group-btn">
+                <button #businessCodeEndGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                  (focus)="onFocusEvent(businessCodeEndGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickUserGuideEvent(2)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>地区コード</span></div>
+      <div class="export-item__value">
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-text-input
+              #areaCdStart
+              [value]="_condition && _condition.areaCdS"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="4"
+              [align]="'left'"
+              [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+              (focusEvent)="onFocusEvent(areaCdStartGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeDivisionCodeEvent($event, 'areaCdS', 3)"
+            ></bl-text-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ areaNameStart }}</span>
+              <div class="input-group-btn">
+                <button #areaCdStartGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                  (focus)="onFocusEvent(areaCdStartGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickUserGuideEvent(3)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+        <span class="input-form__sep">～</span>
+        <span class="input-form__half">
+          <span class="input-form__code input_code">
+            <bl-text-input
+              [value]="_condition && _condition.areaCdE"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="9"
+              [align]="'left'"
+              [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+              (focusEvent)="onFocusEvent(areaCdEndGuideBtn)"
+              (blurEvent)="onBlurEvent()"
+              (changeEvent)="onChangeDivisionCodeEvent($event, 'areaCdE', 4)"
+            ></bl-text-input>
+          </span>
+          <span class="input-form__name">
+            <div class="input-group">
+              <span disabled class="form-control">{{ areaNameEnd }}</span>
+              <div class="input-group-btn">
+                <button #areaCdEndGuideBtn
+                  class="btn btn-default"
+                  type="button"
+                  [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip || _condition.exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                  (focus)="onFocusEvent(areaCdEndGuideBtn)"
+                  (blur)="onBlurEvent()"
+                  (click)="onClickUserGuideEvent(4)"
+                >
+                  <span class="icon-icon_guide"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>締日</span></div>
+      <div class="export-item__value">
+        <bl-number-input style="width: 88px;"
+          [(value)]="_condition && _condition.cutoffDay"
+          [option]="{ max: 31 }">
+        </bl-number-input>
+        <span class="condition-label">&nbsp;&nbsp;日</span>
+      </div>
+    </div>
+    <div class="export-item" *ngIf="_condition.exportInfoType !== ExportSlipTypeDiv.Slip">
+      <div class="export-item__label"><span>部品作業区分</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select #glassClassDiv
+            [disabled]="_condition.exportInfoType === ExportSlipTypeDiv.Slip"
+            [value]="_condition && _condition.glassClassDiv"
+            [items]="ExportPartsWorkDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeGlassClassDiv($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>ヘッダ行</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select #outPutHeaderDiv
+            [value]="_condition && _condition.outPutHeaderDiv"
+            [items]="OutputDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeOutPutHeaderDiv($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>順序</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select #outPutOrderDiv
+            [value]="_condition && _condition.outPutOrderDiv"
+            [items]="ExportOrderDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeOutPutOrderDiv($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-export-panel-container>

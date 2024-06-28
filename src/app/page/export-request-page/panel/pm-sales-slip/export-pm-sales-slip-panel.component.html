@@ -1,0 +1,369 @@
+<app-export-panel-container
+  #blContainer
+  [exportInfoTabDiv]="exportInfoTabDiv"
+  [exportInfoDiv]="exportInfoDiv"
+  [organizationSelectMode]="organizationSelectMode"
+>
+  <div condition>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力内容</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [value]="exportInfoDiv"
+            [items]="_exportInfoItems"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeExportInfo($event)"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label label-tag-required"><span>売上日</span></div>
+      <div class="export-item__value">
+        <app-export-date-range
+          #salesDateRange
+          [(startValue)]="_condition && _condition.salesDateStart"
+          [(endValue)]="_condition && _condition.salesDateEnd"
+        ></app-export-date-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>入力日</span></div>
+      <div class="export-item__value">
+        <app-export-date-range
+          #inputDateRange
+          [(startValue)]="_condition && _condition.inputDateStart"
+          [(endValue)]="_condition && _condition.inputDateEnd"
+        ></app-export-date-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>伝票番号</span></div>
+      <div class="export-item__value">
+        <app-export-text-range
+          #slipNumberRange
+          [(startValue)]="_condition && _condition.slipNumberStart"
+          [(endValue)]="_condition && _condition.slipNumberEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="9"
+        ></app-export-text-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>得意先</span></div>
+      <div class="export-item__value">
+        <app-export-text-guide-range blCustomFocus
+          #customerCodeRange
+          [(startValue)]="_condition && _condition.customerCodeStart"
+          [(endValue)]="_condition && _condition.customerCodeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="9"
+          [align]="'right'"
+          [nextTarget]="areaCdRange"
+          (focusEvent)="onFocusGuideCondition($event)"
+          (blurEvent)="onBlurGuideCondition($event)"
+          (clickStartGuideEvent)="onClickCustomerGuide($event, true)"
+          (clickEndGuideEvent)="onClickCustomerGuide($event, false)"
+        ></app-export-text-guide-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>地区</span></div>
+      <div class="export-item__value">
+        <app-export-text-guide-range blCustomFocus
+          #areaCdRange
+          [(startValue)]="_condition && _condition.areaCdStart"
+          [(endValue)]="_condition && _condition.areaCdEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="4"
+          [align]="'right'"
+          [nextTarget]="businessCodeRnage"
+          (focusEvent)="onFocusGuideCondition($event)"
+          (blurEvent)="onBlurGuideCondition($event)"
+          (clickStartGuideEvent)="onClickUserGuide($event, true, CodeDivGenre.AreaType)"
+          (clickEndGuideEvent)="onClickUserGuide($event, false, CodeDivGenre.AreaType)"
+        ></app-export-text-guide-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>業種</span></div>
+      <div class="export-item__value">
+        <app-export-text-guide-range blCustomFocus
+          #businessCodeRnage
+          [(startValue)]="_condition && _condition.businessCodeStart"
+          [(endValue)]="_condition && _condition.businessCodeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="4"
+          [align]="'right'"
+          [nextTarget]="picEmployeeCodeRange"
+          (focusEvent)="onFocusGuideCondition($event)"
+          (blurEvent)="onBlurGuideCondition($event)"
+          (clickStartGuideEvent)="onClickUserGuide($event, true, CodeDivGenre.BusinessCode)"
+          (clickEndGuideEvent)="onClickUserGuide($event, false, CodeDivGenre.BusinessCode)"
+        ></app-export-text-guide-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>担当者</span></div>
+      <div class="export-item__value">
+        <app-export-text-guide-range blCustomFocus
+          #picEmployeeCodeRange
+          [(startValue)]="_condition && _condition.picEmployeeCodeStart"
+          [(endValue)]="_condition && _condition.picEmployeeCodeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="5"
+          [align]="'right'"
+          [nextTarget]="orderEmployeeCodeRange"
+          (focusEvent)="onFocusGuideCondition($event)"
+          (blurEvent)="onBlurGuideCondition($event)"
+          (clickStartGuideEvent)="onClickEmployeeGuide($event, true, 'picEmployee')"
+          (clickEndGuideEvent)="onClickEmployeeGuide($event, false, 'picEmployee')"
+        ></app-export-text-guide-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>受注者</span></div>
+      <div class="export-item__value">
+        <app-export-text-guide-range blCustomFocus
+          #orderEmployeeCodeRange
+          [(startValue)]="_condition && _condition.orderEmployeeCodeStart"
+          [(endValue)]="_condition && _condition.orderEmployeeCodeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="5"
+          [align]="'right'"
+          [nextTarget]="issueEmployeeCodeRange"
+          (focusEvent)="onFocusGuideCondition($event)"
+          (blurEvent)="onBlurGuideCondition($event)"
+          (clickStartGuideEvent)="onClickEmployeeGuide($event, true, 'orderEmployee')"
+          (clickEndGuideEvent)="onClickEmployeeGuide($event, false, 'orderEmployee')"
+        ></app-export-text-guide-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>発行者</span></div>
+      <div class="export-item__value">
+        <app-export-text-guide-range blCustomFocus
+          #issueEmployeeCodeRange
+          [(startValue)]="_condition && _condition.issueEmployeeCodeStart"
+          [(endValue)]="_condition && _condition.issueEmployeeCodeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="5"
+          [align]="'right'"
+          [nextTarget]="salesSlipExportSlipSelect"
+          (focusEvent)="onFocusGuideCondition($event)"
+          (blurEvent)="onBlurGuideCondition($event)"
+          (clickStartGuideEvent)="onClickEmployeeGuide($event, true, 'issueEmployee')"
+          (clickEndGuideEvent)="onClickEmployeeGuide($event, false, 'issueEmployee')"
+        ></app-export-text-guide-range>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>伝票区分</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            #salesSlipExportSlipSelect
+            [(value)]="_condition && _condition.salesSlipExportSlipDiv"
+            [items]="_slipDivItems"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>赤伝区分</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [(value)]="_condition && _condition.salesSlipExportRedSlipDiv"
+            [items]="_redSlipDivItems"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label"><span>発行タイプ</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [(value)]="_condition && _condition.salesSlipExportIssueTypeDiv"
+            [items]="_issueTypeDivItems"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="exportInfoDiv === ExportInfoDiv.SalesSlipDetail">
+      <div class="export-item">
+        <div class="export-item__label"><span>商品大分類</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #itemLClassCdRange
+            [(startValue)]="_condition && _condition.itemLClassCdStart"
+            [(endValue)]="_condition && _condition.itemLClassCdEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="4"
+            [align]="'right'"
+            [nextTarget]="itemMClassCdRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickUserGuide($event, true, CodeDivGenre.ItemLClass)"
+            (clickEndGuideEvent)="onClickUserGuide($event, false, CodeDivGenre.ItemLClass)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>商品中分類</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #itemMClassCdRange
+            [(startValue)]="_condition && _condition.itemMClassCdStart"
+            [(endValue)]="_condition && _condition.itemMClassCdEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="4"
+            [align]="'right'"
+            [nextTarget]="blCdGroupCodeRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickItemMClassGuide($event, true)"
+            (clickEndGuideEvent)="onClickItemMClassGuide($event, false)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>グループコード</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #blCdGroupCodeRange
+            [(startValue)]="_condition && _condition.blCdGroupCodeStart"
+            [(endValue)]="_condition && _condition.blCdGroupCodeEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="5"
+            [align]="'right'"
+            [nextTarget]="blPartsCdRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickBlCdGroupCodeGuide($event, true)"
+            (clickEndGuideEvent)="onClickBlCdGroupCodeGuide($event, false)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>BLコード</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #blPartsCdRange
+            [(startValue)]="_condition && _condition.blPartsCdStart"
+            [(endValue)]="_condition && _condition.blPartsCdEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="5"
+            [align]="'right'"
+            [nextTarget]="itemMakerCdRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickBlPrtsCdGuide($event, true)"
+            (clickEndGuideEvent)="onClickBlPrtsCdGuide($event, false)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>メーカー</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #itemMakerCdRange
+            [(startValue)]="_condition && _condition.itemMakerCdStart"
+            [(endValue)]="_condition && _condition.itemMakerCdEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="4"
+            [align]="'right'"
+            [nextTarget]="supplierCdRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickItemMakerGuide($event, true)"
+            (clickEndGuideEvent)="onClickItemMakerGuide($event, false)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>仕入先</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #supplierCdRange
+            [(startValue)]="_condition && _condition.supplierCdStart"
+            [(endValue)]="_condition && _condition.supplierCdEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="9"
+            [align]="'right'"
+            [nextTarget]="salesDivRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickSupplierGuide($event, true)"
+            (clickEndGuideEvent)="onClickSupplierGuide($event, false)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>販売区分</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #salesDivRange
+            [(startValue)]="_condition && _condition.salesDivStart"
+            [(endValue)]="_condition && _condition.salesDivEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="4"
+            [align]="'right'"
+            [nextTarget]="whCodeRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickUserGuide($event, true, CodeDivGenre.SalesDiv)"
+            (clickEndGuideEvent)="onClickUserGuide($event, false, CodeDivGenre.SalesDiv)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>倉庫</span></div>
+        <div class="export-item__value">
+          <app-export-text-guide-range blCustomFocus
+            #whCodeRange
+            [(startValue)]="_condition && _condition.whCodeStart"
+            [(endValue)]="_condition && _condition.whCodeEnd"
+            [option]="{ allows: ['number'], convertHalf: true }"
+            [maxlength]="6"
+            [align]="'right'"
+            [nextTarget]="shelfNumRange"
+            (focusEvent)="onFocusGuideCondition($event)"
+            (blurEvent)="onBlurGuideCondition($event)"
+            (clickStartGuideEvent)="onClickWarehouseGuide($event, true)"
+            (clickEndGuideEvent)="onClickWarehouseGuide($event, false)"
+          ></app-export-text-guide-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>棚番</span></div>
+        <div class="export-item__value">
+          <app-export-text-range
+            #shelfNumRange
+            [(startValue)]="_condition && _condition.shelfNumStart"
+            [(endValue)]="_condition && _condition.shelfNumEnd"
+            [option]="{ allows: ['katakana', 'number', 'alphabet', 'symbol'], convertHalf: true }"
+            [maxlength]="8"
+          ></app-export-text-range>
+        </div>
+      </div>
+      <div class="export-item">
+        <div class="export-item__label"><span>在庫取寄区分</span></div>
+        <div class="export-item__value">
+          <div class="single-input">
+            <bl-select
+              [(value)]="_condition && _condition.stockBackorderDesignDiv"
+              [items]="_stockBackorderDivItems"
+              [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            ></bl-select>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</app-export-panel-container>

@@ -1,0 +1,74 @@
+.option-body {
+  padding-bottom: 0 !important;
+}
+
+@mixin conditionInputShow() {
+  visibility: visible;
+  opacity: 1;
+}
+
+@mixin multiConditionInput() {
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.condition {
+  &.open {
+    .condition-input, .tab-submit {
+      @include conditionInputShow();
+    }
+    .multi-input .condition-input, .multi-input .tab-submit.show {
+      @include multiConditionInput();
+    }
+  }
+  &.closed {
+    .condition-input, .tab-submit {
+      display: none;
+    }
+    .multi-input .condition-input.show, .multi-input .tab-submit.show {
+      @include multiConditionInput();
+    }
+  }
+  .condition-input, .tab-submit {
+    display: block;
+    visibility: hidden;
+    &.show {
+      @include conditionInputShow();
+    }
+  }
+  .condition-label {
+    margin: auto;
+  }
+}
+
+.tab-option {
+  background-color: #d5d5d5;
+  border: 1px solid #ddd;
+  border-top: unset;
+  transition: 0.3s;
+  .option-title {
+    padding: 5px 15px;
+    border-top: 1px solid #eaeaea;
+    font-weight: 600;
+  }
+  .option-body {
+    background: #fff;
+    padding: 15px 0 0 30px;
+  }
+}
+
+.tab-option {
+  min-width: 1215px;
+}
+
+.big-g-1__no-border {
+  padding-right: 15px;
+  padding-left: 4%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+}

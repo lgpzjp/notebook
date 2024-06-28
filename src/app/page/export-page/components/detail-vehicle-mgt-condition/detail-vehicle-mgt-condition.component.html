@@ -1,0 +1,250 @@
+
+<div class="tab-option condition"
+[class.open]="_isOpened"
+[class.opened]="_hasOpened"
+[class.closed]="_hasClosed">
+<div class="option-title condition-input">
+  詳細条件
+</div>
+<div class="option-body condition-input">
+  <div class="row">
+    <div class="big-g-1__no-border">
+      <div class="row">
+        <div class="group-1">
+          <label>得意先コード</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.customerCodeStart"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="9"
+              (changeEvent)="onChangeCustomerCode($event, 'ge')">
+            </bl-text-input>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2">～</span>
+          </div>
+        </div>
+        <div class="group-1">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.customerCodeEnd"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="9"
+              (changeEvent)="onChangeCustomerCode($event, 'le')">
+            </bl-text-input>
+          </div>
+        </div>
+
+        <div class="group-1">
+          <label>管理番号</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.custVcleManageGroupCode"
+              [maxlength]="9"
+              (changeEvent)="onChangeCustVcleManageGroupCode($event)">
+            </bl-text-input>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+        </div>
+        <div class="group-1">
+          <label>型式</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.fullModel"
+              [maxlength]="9"
+              (changeEvent)="onChangeFullModel($event)">
+            </bl-text-input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-1">
+          <label>車両備考</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.vcleRemarksName"
+              [maxlength]="100"
+              (changeEvent)="onChangeVcleRemarksName($event)">
+            </bl-text-input>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2">&nbsp;</span>
+          </div>
+        </div>
+        <div class="group-1">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            &nbsp;
+          </div>
+        </div>
+        <div class="group-1" *ngIf="showDetailFlg">
+          <label>グループコード</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.blCdGroupCodeStart"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="9"
+              (changeEvent)="onChangeBlCdGroupCode($event, 'ge')">
+            </bl-text-input>
+          </div>
+        </div>
+        <div class="group-3" *ngIf="showDetailFlg">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2">～</span>
+          </div>
+        </div>
+        <div class="group-1" *ngIf="showDetailFlg">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.blCdGroupCodeEnd"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="9"
+              (changeEvent)="onChangeBlCdGroupCode($event, 'le')">
+            </bl-text-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- 明細 -->
+  <div class="row" *ngIf="showDetailFlg">
+    <div class="big-g-1__no-border">
+      <div class="row">
+        <div class="group-1">
+          <label>BLコード</label>
+          <div class="form-group condition-flex">
+            <bl-number-input
+              [option]="{ max:99999999, intLength:8 }"
+              [align]="left"
+              [value]="detailVehicleMgtCondition.blPrtsCdStart"
+              (changeEvent)="onChangeBlPrtsCd($event, 'ge')">
+            </bl-number-input>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2">～</span>
+          </div>
+        </div>
+        <div class="group-1">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <bl-number-input
+              [option]="{ max:99999999, intLength:8 }"
+              [align]="left"
+              [value]="detailVehicleMgtCondition.blPrtsCdEnd"
+              (changeEvent)="onChangeBlPrtsCd($event, 'le')">
+            </bl-number-input>
+          </div>
+        </div>
+
+        <div class="group-1">
+          <label>品番</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.partsNumber"
+              [maxlength]="24"
+              (changeEvent)="onChangePartsNumber($event)">
+            </bl-text-input>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2"></span>
+          </div>
+        </div>
+        <div class="group-1">
+          <label>品名</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.partsName"
+              [maxlength]="100"
+              (changeEvent)="onChangePartsName($event)">
+            </bl-text-input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="group-1">
+          <label>在庫取寄</label>
+          <div class="form-group condition-flex">
+            <bl-select id="StockBackorderDiv"
+              [value]="detailVehicleMgtCondition.vehicleStockBackorderDiv"
+              [items]="VehicleStockBackorderDivArray"
+              [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+              (changeEvent)="onChangeCustomerDealsDiv($event)">
+            </bl-select>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2">&nbsp;</span>
+          </div>
+        </div>
+        <div class="group-1">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            &nbsp;
+          </div>
+        </div>
+        <div class="group-1">
+          <label>倉庫コード</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.whCodeStart"
+              [option]="{ allows: ['number', 'alphabet'], convertHalf: true }"
+              [maxlength]="6"
+              (changeEvent)="onChangeWhCode($event, 'ge')"
+              [disabled]="!showWhCodeFlg">
+            </bl-text-input>
+          </div>
+        </div>
+        <div class="group-3">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <span class="v-small-item-in-g2">～</span>
+          </div>
+        </div>
+        <div class="group-1">
+          <label>&nbsp;</label>
+          <div class="form-group condition-flex">
+            <bl-text-input
+              [value]="detailVehicleMgtCondition.whCodeEnd"
+              [option]="{ allows: ['number'], convertHalf: true }"
+              [maxlength]="6"
+              (changeEvent)="onChangeWhCode($event, 'le')"
+              [disabled]="!showWhCodeFlg">
+            </bl-text-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-submit" detail-vehicle-mgt-condition-footer>
+  <div class="search-condition-detail-footer">
+    <div class="search-condition-detail-footer-condition">
+
+    </div>
+    <div class="search-condition-detail-footer-btn">
+      <button class="btn btn-default" type="button" (click)="onClickClearButton()">
+        条件取消
+      </button>
+    </div>
+  </div>
+</div>
+</div>

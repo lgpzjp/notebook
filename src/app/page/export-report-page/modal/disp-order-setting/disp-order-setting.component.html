@@ -1,0 +1,16 @@
+<bl-modal-content #content
+  title="表示順位設定"
+  [disableOkButton]="disabledOkButton"
+>
+  <div body>
+    <p *ngIf="shouldShowAnnotation">
+      「ドラッグ＆ドロップ」または「Alt＋矢印キー」で並び替えができます。
+    </p>
+    <div class="sortable-wrap">
+      <bl-sortable #blSortable
+        [(items)]="items"
+        [option]="option"
+      ></bl-sortable>
+    </div>
+  </div>
+</bl-modal-content>

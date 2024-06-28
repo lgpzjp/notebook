@@ -1,0 +1,178 @@
+<div>
+  <div *ngIf="conditionShown.contractDate" class="export-item">
+    <div class="export-item__label"><span>契約日</span></div>
+    <div class="export-item__value">
+      <bl-date-range
+        [(startValue)]="condition.contractDateStart"
+        [(endValue)]="condition.contractDateEnd"
+      ></bl-date-range>
+    </div>
+  </div>
+  <!-- 契約開始日 -->
+  <div *ngIf="conditionShown.contractStartDate" class="export-item">
+    <div class="export-item__label"><span>契約開始日</span></div>
+    <div class="export-item__value">
+      <bl-date-range
+        [(startValue)]="condition.contractStartDateStart"
+        [(endValue)]="condition.contractStartDateEnd"
+      ></bl-date-range>
+    </div>
+  </div>
+  <!-- 契約終了日 -->
+  <div *ngIf="conditionShown.contractEndDate" class="export-item">
+    <div class="export-item__label"><span>契約終了日</span></div>
+    <div class="export-item__value">
+      <bl-date-range
+        [(startValue)]="condition.contractEndDateStart"
+        [(endValue)]="condition.contractEndDateEnd"
+      ></bl-date-range>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.cancelDate" class="export-item">
+    <div class="export-item__label"><span>解約日</span></div>
+    <div class="export-item__value">
+      <bl-date-range
+        [(startValue)]="condition.cancelDateStart"
+        [(endValue)]="condition.cancelDateEnd"
+      ></bl-date-range>
+    </div>
+  </div>
+
+  <div *ngIf="conditionShown.mpContractNo" class="export-item">
+    <div class="export-item__label"><span>契約番号</span></div>
+    <div class="export-item__value">
+      <div class="range-input">
+        <bl-text-range
+          [(startValue)]="condition.mpContractNoStart"
+          [(endValue)]="condition.mpContractNoEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="9"
+        ></bl-text-range>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.mpCodeList" class="export-item">
+    <div class="export-item__label"><span>パック</span></div>
+    <div class="export-item__value">
+      <div class="single-input">
+        <bl-multi-select
+          [values]="condition.mpCodeList"
+          [items]="maintePackNameList"
+          [option]="{'labelProperty': 'mpName','valueProperty': 'mpCode'}"
+          (changeItemsEvent)="onChangeMpCodeList($event)"
+        ></bl-multi-select>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.mpContractStatus" class="export-item">
+    <div class="export-item__label"><span>契約状況</span></div>
+    <div class="export-item__value">
+      <bl-checkbox-group
+        [values]="condition.mpContractStatusList || []"
+        [items]="mpContractStatusArray"
+        [option]="{'labelProperty': 'text','valueProperty': 'value'}"
+        [groupType]="'inline'"
+        (changeEvent)="onChangeMpContractStatusList($event)"
+      ></bl-checkbox-group>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.outputOrg" class="export-item">
+    <div class="export-item__label"><span>出力拠点</span></div>
+    <div class="export-item__value">
+      <bl-checkbox-group
+        [values]="getOutputOrgValues()"
+        [items]="OutputOrgArray"
+        [option]="{'labelProperty': 'text','valueProperty': 'value'}"
+        [groupType]="'inline'"
+        (changeEvent)="onChangeOutputOrgArray($event)"
+      ></bl-checkbox-group>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.contractEmployee" class="export-item">
+    <div class="export-item__label"><span>契約担当</span></div>
+    <div class="export-item__value">
+      <div class="multi-input">
+        <div class="input-group">
+          <bl-text-input
+            [value]="condition.contractEmployeeName1"
+            [maxlength]="10"
+            (changeEvent)="onChangeEmployeeCode($event, 0)"
+          ></bl-text-input>
+          <span class="input-group-btn">
+            <button
+              #receptPicGuideButton1
+              class="btn btn-default"
+              type="button"
+              (click)="onClickEmployeeGuide(0)"
+            >
+              <span aria-hidden="true" class="icon-icon_guide"></span>
+            </button>
+          </span>
+        </div>
+        <div class="input-group">
+          <bl-text-input
+            [value]="condition.contractEmployeeName2"
+            [maxlength]="10"
+            (changeEvent)="onChangeEmployeeCode($event, 1)"
+          ></bl-text-input>
+          <span class="input-group-btn">
+            <button
+              #receptPicGuideButton2
+              class="btn btn-default"
+              type="button"
+              (click)="onClickEmployeeGuide(1)"
+            >
+              <span aria-hidden="true" class="icon-icon_guide"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.mpDepositUnreceive" class="export-item">
+    <div class="export-item__label"><span>メンテナンスパック預り金</span></div>
+    <div class="export-item__value">
+      <bl-checkbox
+        [value]="condition.mpDepositUnreceive"
+        [label]="'未入金額ありのみ印字'"
+        [checked]="condition.mpDepositUnreceive"
+        (changeEvent)="condition.mpDepositUnreceive = $event.target.checked">
+      </bl-checkbox>
+    </div>
+  </div>
+  <!-- 契約メモ -->
+  <div *ngIf="conditionShown.contractNote" class="export-item">
+    <div class="export-item__label"><span>契約メモ</span></div>
+    <div class="export-item__value">
+      <bl-text-input
+        [(value)]="condition.contractNote"
+        [maxlength]="90"
+      ></bl-text-input>
+    </div>
+  </div>
+  <!-- 点検サイクル不一致フラグ -->
+  <div *ngIf="conditionShown.mismatchCheckCycleFlag" class="export-item mismatch-flag">
+    <div class="export-item__label">
+      <span>点検サイクルが<br>不一致の契約</span>
+      <span
+        class="icon-icon_information icon-description"
+        [tooltip]="tooltipContent"
+        container="body"
+      ></span>
+      <ng-template #tooltipContent>
+        <div class="tooltip-label">
+          メンテナンスパックの「車検/法定/新車」の点検予定年月が車両点検サイクルと一致していない契約
+        </div>
+      </ng-template>
+    </div>
+    <div class="export-item__value">
+      <bl-checkbox-group
+        [values]="getMismatchCheckCycleFlag()"
+        [items]="[{'value':'mismatchInspectionCycleFlag', 'text':'車検が不一致の契約'},{'value':'mismatchLegalOrNewCarCycleFlag', 'text':'法定・新車が不一致の契約'}]"
+        [option]="{'labelProperty': 'text','valueProperty': 'value'}"
+        [groupType]="'inline'"
+        (changeEvent)="onChangeMismatchCheckCycleFlagArray($event)"
+      ></bl-checkbox-group>
+    </div>
+  </div>
+</div>

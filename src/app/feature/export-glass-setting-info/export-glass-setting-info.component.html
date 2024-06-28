@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row glass-setting-info-width">
+    <div class="col-xs-12">
+      <div class="search-condition">
+        <div class="tab-header">
+          出力条件を指定して　出力開始　ボタンをクリックしてください。
+        </div>
+        <div class="tab-body">
+          <div class="row">
+            <div class="col-xs-12 search-condition__contents">
+              <div class="search-icon">
+                <span class="icon-icon_search"></span>
+              </div>
+              <div class="big-g-1">
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力内容</label>
+                    <div class="form-group condition-flex">
+                      <bl-select
+                        #exportInfoType
+                        [(value)]="exportCondition.exportPatternCode"
+                        [items]="ExportSettingInfoDivArray"
+                        [option]="{ valueProperty: 'value', labelProperty: 'text' }">
+                      </bl-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

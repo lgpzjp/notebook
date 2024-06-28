@@ -1,0 +1,77 @@
+<ng-container shareDeviceSession [pageId]="PAGE_ID"></ng-container>
+
+<!-- ナビバー -->
+<div class="navbar">
+  <!-- タイトル -->
+  <div class="navbar__title">
+    <div>{{ PAGE_TITLE }}</div>
+  </div>
+  <div class="navbar__contents">
+    <!-- 抽出条件バー -->
+    <share-search-condition-panel blFocusControl
+      #conditionPanel
+      [searchBtnText]="'検索'"
+      [isDisplayDetailToggle]="false"
+      [isDisplaySubSearchButton]="false"
+      (searchEvent)="onSearch()"
+    >
+      <!-- 基本条件項目エリア -->
+      <div class="basic-condition" basic-condition>
+        <div class="basic-row">
+          <div class="basic-item">
+            <share-organization-combo-box
+              [value]="_condition && _condition.organizationCode"
+              [officeControl]="true"
+              [withAllCompanyDiv]="WithAllCompanyDiv.AllCompany"
+              (changeEvent)="onChangeOrganization($event)"
+            ></share-organization-combo-box>
+          </div>
+          <div class="basic-item">
+            <app-export-date-range
+              #dateRangeInput
+              [startValue]="_condition && _condition.exportDateStart"
+              [endValue]="_condition && _condition.exportDateEnd"
+              [displayMonthButton]="false"
+              (changeEvent)="onChangeExportDateRange($event)"
+            ></app-export-date-range>
+          </div>
+        </div>
+      </div>
+    </share-search-condition-panel>
+  </div>
+</div>
+<!-- 検索結果 -->
+<div class="grid-container">
+  <div class="grid-container__header">
+    <share-auto-update #autoUpdate
+      [hideCheck]="false"
+      [intervalUnit]="AutoUpdateIntervalUnit.Minutes"
+      [minute]="5"
+      [storageKey]="AUTO_UPDATE_STORAGE_KEY"
+      [defaultSetting]="AutoUpdateDefaultSetting"
+      [latestUpdateDateTime]="_latestUpdateDateTime"
+      [pause]="_autoUpdatePause"
+      (autoUpdateEvent)="onAutoUpdate()"
+    ></share-auto-update>
+  </div>
+  <div class="grid-container__body" [class.hidden]="!_isGridReady">
+    <bl-reference-grid
+      #refGrid
+      [gridHeight]="'auto'"
+      [gridOptions]="_gridOptions"
+      [isOperable]="false"
+      [pagination]="true"
+      [customPagination]="true"
+      [pageSizePatterns]="PageSizePatterns"
+      [totalCount]="_totalCount"
+      [noRowsMessage]="_gridMessage"
+      [prevFocusTarget]="conditionPanel"
+      (onReady)="onReadyGrid()"
+      (gotoPrevPage)="onPrevPage()"
+      (gotoNextPage)="onNextPage()"
+      (changePageSize)="onChangePageSize($event)"
+    ></bl-reference-grid>
+  </div>
+
+</div>
+

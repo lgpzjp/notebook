@@ -1,0 +1,28 @@
+.confirm-contents {
+  padding: 10px;
+}
+
+.confirm-title {
+  font-weight: bold;
+  color: red;
+  margin-bottom: 15px;
+}
+
+.confirm-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+.confirm-name-text {
+  color: green;
+}
+
+.confirm-highlight-text {
+  color: red;
+}
+
+.confirm-bold-text {
+  font-weight: bold;
+}

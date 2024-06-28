@@ -1,0 +1,55 @@
+<div class="navbar">
+  <div class="navbar__title">
+    <span>{{ _title }}</span>
+  </div>
+  <div class="navbar__contents">
+  </div>
+</div>
+<div class="export-container">
+  <div class="export-menu">
+    <div class="export-menu__body">
+      <div
+        class="export-group-list"
+        [class.hide]="_isOmitMenu"
+      >
+        <div *ngFor="let groupItem of _exportGroupItems"
+          class="export-group-item"
+          [class.active]="groupItem.active"
+          (click)="onClickExportGroup(groupItem.id)"
+          (keydown.space)="onClickExportGroup(groupItem.id)"
+        >
+          <span>{{ groupItem.label }}</span>
+        </div>
+      </div>
+      <div
+        class="export-menu-list"
+        [class.hide]="_isOmitMenu"
+      >
+        <div *ngFor="let menuItem of _exportMenuItems"
+          class="export-menu-item"
+          [class.active]="menuItem.active"
+          (click)="onClickExportMenu(menuItem.id)"
+          (keydown.space)="onClickExportMenu(menuItem.id)"
+        >
+        <span>{{ menuItem.label }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="export-menu__bottom" [class.omit]="_isOmitMenu">
+      <span
+        class="menu-slider-arrow"
+        placement="right"
+        [tooltip]="'サイドバーを' + (_isOmitMenu ? '展開する' : '折りたたむ')"
+        (click)="_isOmitMenu = !_isOmitMenu;"
+      >
+        <span class="glyphicon" [ngClass]="_isOmitMenu ? 'glyphicon-chevron-right' : 'glyphicon-chevron-left'"></span>
+        <span class="glyphicon" [ngClass]="_isOmitMenu ? 'glyphicon-chevron-right' : 'glyphicon-chevron-left'"></span>
+      </span>
+    </div>
+  </div>
+
+  <div class="export-condition">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

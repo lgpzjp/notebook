@@ -1,0 +1,53 @@
+<app-export-panel-container #blContainer
+  [exportInfoTabDiv]="exportInfoTabDiv"
+  [exportInfoDiv]="exportInfoDiv"
+  [organizationSelectMode]="organizationSelectMode"
+>
+  <div condition>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力内容</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [value]="exportInfoDiv"
+            [items]="_exportInfoItems"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeExportInfo($event)">
+          </bl-select>
+        </div>
+      </div>
+    </div>
+    <div class="export-item">
+      <div class="export-item__label label-tag-required"><span>{{ exportInfoName }}更新期間</span></div>
+      <div class="export-item__value">
+        <app-export-date-range
+          [(startValue)]="_updateDateStart"
+          [(endValue)]="_updateDateEnd"
+        ></app-export-date-range>
+      </div>
+    </div>
+    <div class="export-item" *ngIf="exportInfoDiv === ExportInfoDiv.Customer">
+      <div class="export-item__label"><span>顧客コード</span></div>
+      <div class="export-item__value">
+        <app-export-text-range
+          [(startValue)]="_customerCodeStart"
+          [(endValue)]="_customerCodeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="9"
+        ></app-export-text-range>
+      </div>
+    </div>
+    <div class="export-item" *ngIf="exportInfoDiv === ExportInfoDiv.Customer">
+      <div class="export-item__label"><span>顧客フリガナ</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-text-input
+            [(value)]="_customerKana"
+            [option]="{ allows: ['katakana', 'number', 'alphabet', 'symbol'], convertKana: true}"
+            [maxlength]="100"
+          ></bl-text-input>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-export-panel-container>

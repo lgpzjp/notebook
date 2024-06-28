@@ -1,0 +1,40 @@
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-extend">
+            <label>顧客・車両情報</label>
+            <div class="form-group condition-flex">
+              <bl-checkbox
+                [value]="exportCustomerVehicleOption.value"
+                [label]="'対象伝票の顧客・車両情報出力'"
+                [checked]="condition.exportCustomerVehicle"
+                (changeEvent)="onChangeCustomerVehicleOption($event)">
+              </bl-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit" detail-slip-condition-footer>
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button"
+        (click)="onClickClearCondition()"
+        >
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

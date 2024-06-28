@@ -1,0 +1,14 @@
+:host {
+  ::ng-deep bl-reference-grid {
+    .reference-grid-footer {
+      display: none;
+    }
+  }
+}
+
+.title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}

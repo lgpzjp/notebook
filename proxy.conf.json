@@ -1,0 +1,40 @@
+[
+  {
+    "context": [
+      "/common/api",
+      "/file/api",
+      "/report/api",
+      "/reportevent/api",
+      "/vehicle/api",
+      "/company/api",
+      "/customer/api",
+      "/contract/api",
+      "/sales/api",
+      "/salesevent/api",
+      "/credit/api",
+      "/creditevent/api",
+      "/deals/api",
+      "/dealsevent/api",
+      "/bizcmn/api",
+      "/cmnservice/api",
+      "/role/api",
+      "/schedule/api",
+      "/vehicleapply/api",
+      "/notification/api",
+      "/bizevent/api",
+      "/lam/api",
+      "/license/api",
+      "/migration/api",
+      "/mamigration/api",
+      "/managementreport/api",
+      "/approach/api",
+      "/process/api",
+      "/billingplatform/api",
+      "/public/api",
+      "/api",
+      "/output/api"
+    ],
+    "target": "http://localhost:4321",
+    "secure": false
+  }
+]

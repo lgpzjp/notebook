@@ -1,0 +1,47 @@
+<div class="col-xs-12">
+  <div class="search-condition-table">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="condition-table-title">
+          <span>出力する項目を変更したい場合は、下記出力パターンを切り替えてください。</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="condition-table-body">
+          <table class="table table-bordered table-fix-layout table-export-format" style="width: 660px;">
+            <thead>
+              <tr>
+                <th width="47%" class="center">テキスト出力情報</th>
+                <th width="47%" class="center">出力パターン</th>
+                <th width="6%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of exportPatternList">
+                <tr *ngIf="item">
+                  <td>
+                    <span class="cell-label">{{ item.exportInfoDivEnumName }}</span>
+                  </td>
+                  <td>
+                    <bl-select
+                      [(value)]="exportPatternSelecteds[item.exportInfoDiv].exportPatternValue"
+                      [(items)]="item.exportPattern"
+                      (changeEvent)="onChangeExportPattern()">
+                    </bl-select>
+                  </td>
+                  <td>
+                    <button class="btn btn-default btn-edit"
+                      (click)="showExportPatternModal(exportPatternSelecteds[item.exportInfoDiv].exportPatternValue, item.exportInfoDiv)">
+                      編集</button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

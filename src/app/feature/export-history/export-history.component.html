@@ -1,0 +1,99 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="search-condition">
+          <div class="tab-header">
+            出力条件を指定して　出力開始　ボタンをクリックしてください。
+          </div>
+          <div class="tab-body" *ngIf="isLoadTabHistory;">
+            <div class="row">
+              <div class="col-xs-12 search-condition__contents">
+                <div class="search-icon">
+                  <span _ngcontent-c11="" class="icon-icon_search"></span>
+                </div>
+                <div class="big-g-1">
+                  <div class="row">
+                    <div class="group-1">
+                      <label>出力内容</label>
+                      <div class="form-group condition-flex">
+                        <bl-select
+                          [value]="exportHistoryConditionSearch.outputInfo"
+                          [items]="outputInfo"
+                          (changeEvent)="onChangeOutputInfo($event)">
+                        </bl-select>
+                      </div>
+                    </div>
+                    <div class="group-2">
+                      <label>売上期間</label>
+                      <div class="form-group condition-flex">
+                        <app-date-picker-condition
+                          (startDateChange)="onStartDateChange($event)"
+                          (endDateChange)="onEndDateChange($event)">
+                        </app-date-picker-condition>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="group-1">
+                      <label>出力タイプ</label>
+                      <div class="form-group condition-flex">
+                        <bl-select
+                          [(value)]="exportHistoryConditionSearch.workType"
+                          [items]="workType"
+                          (changeEvent)="onChangeWorkType($event)">
+                        </bl-select>
+                      </div>
+                    </div>
+                    <div class="group-1">
+                      <label>管理組織</label>
+                      <div class="form-group condition-flex">
+                        <share-organization-combo-box
+                          [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                          [value]="selectedOrganizationCode"
+                          (changeEvent)="onChangeOrgCode($event)">
+                        </share-organization-combo-box>
+                      </div>
+                    </div>
+                    <div *ngIf="systemItems" class="group-1">
+                      <label>業務</label>
+                      <div class="form-group condition-flex">
+                        <bl-select
+                          [value]="_productCode"
+                          [items]="systemItems"
+                          [disabled]="systemItems.length < 2"
+                          [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                          (changeEvent)="onChangeSystem($event)"
+                        ></bl-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="big-g-2">
+                  <button [disabled]="!isShowCustomerInfo"
+                    class="btn btn-default"
+                    type="button"
+                    (click)="onPanelShown(isShowDetailCondition)"
+                  >
+                    <span>詳細条件</span>
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-detail-customer-condition
+            #conditions
+            [detailCustomerCondition]="detailCustomerConditionValue"
+            (changeEvent)="onChangeDetailCustomerCondition($event)"
+            (clearCondition)="clearSearch()">
+          </app-detail-customer-condition>
+        </div>
+      </div>
+      <app-export-pattern-selector
+        [tabID]="exportInfoTabDiv.WorkHistory"
+        [(exportCondition)]="exportHistoryConditionSearch"
+        [dataExportPatterns]="dataExportPatterns"
+        (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+      </app-export-pattern-selector>
+    </div>
+  </div>

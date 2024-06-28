@@ -1,0 +1,133 @@
+
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-1" *ngIf="billingFlg">
+            <label>得意先コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailCustomerCondition.billingCodeStart"
+                [maxlength]="9"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                (changeEvent)="onChangeBillingCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-1" *ngIf="SupplierFlg">
+            <label>仕入先コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailCustomerCondition.supplierCdStart"
+                [maxlength]="9"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                (changeEvent)="onChangeSupplierCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1" *ngIf="billingFlg">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailCustomerCondition.billingCodeEnd"
+                [maxlength]="9"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                (changeEvent)="onChangeBillingCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-1" *ngIf="SupplierFlg">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailCustomerCondition.supplierCdEnd"
+                [maxlength]="9"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                (changeEvent)="onChangeSupplierCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>締日</label>
+            <div class="form-group condition-flex group-0">
+              <bl-text-input
+                [value]="detailCustomerCondition.cutoffDay"
+                [maxlength]="2"
+                [option]="{ allows: ['number'], convertHalf: true, max: 31 }"
+                (changeEvent)="onChangeCutoffDay($event)">
+              </bl-text-input>
+              <label class="label-flex">&nbsp;&nbsp;日</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="group-1">
+            <label>取引有無</label>
+            <div class="form-group condition-flex" *ngIf="billingFlg">
+              <bl-select id="billingDiv"
+                [value]="detailCustomerCondition.customerDealsDiv"
+                [items]="CustomerDealsDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeCustomerDealsDiv($event)">
+              </bl-select>
+            </div>
+            <div class="form-group condition-flex" *ngIf="SupplierFlg">
+              <bl-select id="supplierDiv"
+                [value]="detailCustomerCondition.supplierDealsDiv"
+                [items]="SupplierDealsDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeSupplierDealsDiv($event)">
+              </bl-select>
+            </div>
+
+          </div>
+          <div class="group-2-1">
+            <label>対象期間</label>
+            <div class="form-group condition-flex">
+              <div class="small-item-in-g2-dr" *ngIf="isShowTargetPeriodFlg">
+                <bl-select [disabled]="!isShowTargetPeriod" id="targetPeriodDetail"
+                  #targetPeriod
+                  [(value)]="detailCustomerCondition.targetPeriod"
+                  [items]="targetPeriodItems">
+                </bl-select>
+              </div>
+              <app-date-picker-condition
+                [startDate]="startDateDetail"
+                [endDate]="endDateDetail"
+                [detailDateCode]="detailDateCode"
+                (startDateChange)="onStartDateDetailChange($event)"
+                (endDateChange)="onEndDateDetailChange($event)">
+              </app-date-picker-condition>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit" detail-customer-slip-condition-footer>
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button" (click)="onClickClearButton()">
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

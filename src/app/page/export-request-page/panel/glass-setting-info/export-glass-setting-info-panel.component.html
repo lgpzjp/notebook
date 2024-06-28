@@ -1,0 +1,21 @@
+<app-export-panel-container
+  #blContainer
+  [exportInfoTabDiv]="exportInfoTabDiv"
+  [exportInfoDiv]="exportInfoDiv"
+>
+  <div condition>
+    <div class="export-item">
+      <div class="export-item__label"><span>出力内容</span></div>
+      <div class="export-item__value">
+        <div class="single-input">
+          <bl-select
+            [(value)]="exportCondition.exportPatternCode"
+            [items]="ExportSettingInfoDivArray"
+            [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+            (changeEvent)="onChangeExportInfo($event)"
+          ></bl-select>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-export-panel-container>

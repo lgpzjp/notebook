@@ -1,0 +1,207 @@
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-1">
+            <label>得意先コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailSalesSlipCondition.customerCodeS"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="9"
+                (changeEvent)="onChangeCustomerCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailSalesSlipCondition.customerCodeE"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="9"
+                (changeEvent)="onChangeCustomerCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>担当者コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailSalesSlipCondition.picEmployeeCodeS"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="10"
+                (changeEvent)="onChangePicEmployeeCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailSalesSlipCondition.picEmployeeCodeE"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="10"
+                (changeEvent)="onChangePicEmployeeCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="group-1">
+            <label>業種コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [disabled]="exportInfoType === ExportSlipTypeDiv.Slip || exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                [value]="detailSalesSlipCondition.dispBusinessCodeS"
+                [maxlength]="4"
+                [option]="{ convertHalf: true, allows: ['number'] }"
+                (changeEvent)="onChangeDispBusinessCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [disabled]="exportInfoType === ExportSlipTypeDiv.Slip || exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                [value]="detailSalesSlipCondition.dispBusinessCodeE"
+                [maxlength]="4"
+                [option]="{ convertHalf: true, allows: ['number'] }"
+                (changeEvent)="onChangeDispBusinessCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>地区コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [disabled]="exportInfoType === ExportSlipTypeDiv.Slip || exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                [value]="detailSalesSlipCondition.areaCdS"
+                [maxlength]="4"
+                [option]="{ convertHalf: true, allows: ['number'] }"
+                (changeEvent)="onChangeAreaCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [disabled]="exportInfoType === ExportSlipTypeDiv.Slip || exportInfoType === ExportSlipTypeDiv.SlipDetail"
+                [value]="detailSalesSlipCondition.areaCdE"
+                [maxlength]="4"
+                [option]="{ convertHalf: true, allows: ['number'] }"
+                (changeEvent)="onChangeAreaCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="group-1">
+            <label>締日</label>
+            <div class="form-group condition-flex group-0">
+              <bl-number-input
+                [(value)]="detailSalesSlipCondition.cutoffDay"
+                [option]="{ min: 1, max: 31 }"
+                >
+              </bl-number-input>
+              <label class="condition-label">&nbsp;&nbsp;日</label>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">　</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>部品作業区分</label>
+            <div class="form-group condition-flex">
+              <bl-select
+                [disabled]="exportInfoType === ExportSlipTypeDiv.Slip"
+                [value]="detailSalesSlipCondition.glassClassDiv"
+                [items]="ExportPartsWorkDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeGlassClassDiv($event)">
+              </bl-select>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>ヘッダ行</label>
+            <div class="form-group condition-flex">
+              <bl-select
+                [value]="detailSalesSlipCondition.outPutHeaderDiv"
+                [items]="OutputDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeOutPutHeaderDiv($event)">
+              </bl-select>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2"></span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>順序</label>
+            <div class="form-group condition-flex">
+              <bl-select
+                [value]="detailSalesSlipCondition.outPutOrderDiv"
+                [items]="ExportOrderDivArray"
+                [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                (changeEvent)="onChangeOutPutOrderDiv($event)">
+              </bl-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit" detail-slip-condition-footer>
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button"
+          (click)="onClickClearButton()"
+        >
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

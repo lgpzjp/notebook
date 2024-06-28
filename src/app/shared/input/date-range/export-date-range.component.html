@@ -1,0 +1,52 @@
+<div blFocusCheck
+  class="date-range"
+  (blurEvent)="onBlur()"
+>
+  <div class="date-range__input" [ngStyle]="styles">
+    <bl-date
+      #startDateInput
+      [(value)]="_startValue"
+      [dateMode]="dateMode"
+      [era]="era"
+      [disabled]="disabled"
+      (changeEvent)="onChangeStartValue($event)"
+    ></bl-date>
+  </div>
+
+  <div class="date-range__sep">～</div>
+
+  <div class="date-range__input" [ngStyle]="styles">
+    <bl-date blCustomFocus
+      #endDateInput
+      [(value)]="_endValue"
+      [dateMode]="dateMode"
+      [era]="era"
+      [disabled]="disabled"
+      [enter]="_nextFocusFunction"
+      (changeEvent)="onChangeEndValue($event)"
+    ></bl-date>
+  </div>
+
+  <div class="date-range__btn" *ngIf="displayMonthButton">
+    <button
+      class="btn btn-default"
+      [disabled]="disabled"
+      (click)="onClickBeforeMonth()"
+    ><<</button>
+  </div>
+  <div class="date-range__btn" *ngIf="displayMonthButton">
+    <button
+      class="btn btn-default"
+      [disabled]="disabled"
+      (click)="onClickThisMonth()"
+    >今月</button>
+  </div>
+  <div class="date-range__btn" *ngIf="displayMonthButton">
+    <button
+      class="btn btn-default"
+      [disabled]="disabled"
+      (click)="onClickAfterMonth()"
+    >>></button>
+  </div>
+
+</div>

@@ -1,0 +1,65 @@
+.export-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  &__label {
+    width: 185px;
+    min-width: 185px;
+    display: flex;
+    align-items: center;
+  }
+  &__value {
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 882px;
+
+    .single-input {
+      width: 300px;
+    }
+  }
+
+  .cutoffDay-label{
+    display: flex;
+    align-items: center;
+  }
+
+  .input-form {
+    &__sep {
+      width: 30px;
+      line-height: 20px;
+      text-align: center;
+    }
+    &__half {
+      width: 380px;
+      display: flex;
+      flex-direction: row;
+      .input_code {
+        width: 135px;
+      }
+    }
+    &__code {
+      width: 80px;
+    }
+    &__name {
+      width: 350px;
+      padding-left: 3px;
+    }
+  }
+
+  .input-group .input-group-btn {
+    z-index: auto;
+  }
+  .input-group .input-group-btn:last-child > .btn-group {
+    z-index: auto;
+  }
+
+  .form-control {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 240px;
+  }
+}

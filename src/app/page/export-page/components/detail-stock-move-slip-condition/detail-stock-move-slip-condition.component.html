@@ -1,0 +1,181 @@
+
+<div class="tab-option condition"
+  [class.open]="_isOpened"
+  [class.opened]="_hasOpened"
+  [class.closed]="_hasClosed">
+  <div class="option-title condition-input">
+    詳細条件
+  </div>
+  <div class="option-body condition-input">
+    <div class="row">
+      <div class="big-g-1__no-border">
+        <div class="row">
+          <div class="group-1">
+            <label>出庫倉庫コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.shippingWhCodeStart"
+                [option]="{ allows: ['number', 'alphabet'], convertHalf: true }"
+                [maxlength]="6"
+                (changeEvent)="onChangeShippingWhCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.shippingWhCodeEnd"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="6"
+                (changeEvent)="onChangeShippingWhCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+
+          <div class="group-1">
+            <label>入庫倉庫コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.enteringWhCodeStart"
+                [option]="{ allows: ['number', 'alphabet'], convertHalf: true }"
+                [maxlength]="6"
+                (changeEvent)="onChangeEnteringWhCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.enteringWhCodeEnd"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="6"
+                (changeEvent)="onChangeEnteringWhCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="group-1">
+            <label>担当者コード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.picEmployeeCodeStart"
+                [option]="{ enableBlank: true, convertHalf: true, allows: ['number'], paddingLeft: '0', denySpace: true }"
+                [maxlength]="5"
+                (changeEvent)="onChangePicEmployeeCode($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.picEmployeeCodeEnd"
+                [option]="{ enableBlank: true, convertHalf: true, allows: ['number'], paddingLeft: '0', denySpace: true }"
+                [maxlength]="5"
+                (changeEvent)="onChangePicEmployeeCode($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+
+          <div class="group-1">
+            <label>メーカーコード</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.itemMakerCdStart"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="9"
+                (changeEvent)="onChangeItemMakerCd($event, 'ge')">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">～</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.itemMakerCdEnd"
+                [option]="{ allows: ['number'], convertHalf: true }"
+                [maxlength]="9"
+                (changeEvent)="onChangeItemMakerCd($event, 'le')">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="group-1">
+            <label>品番</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.partsNumber"
+                [maxlength]="24"
+                (changeEvent)="onChangePartsNumber($event)">
+              </bl-text-input>
+            </div>
+          </div>
+          <div class="group-3">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              <span class="v-small-item-in-g2">&nbsp;</span>
+            </div>
+          </div>
+          <div class="group-1">
+            <label>&nbsp;</label>
+            <div class="form-group condition-flex">
+              &nbsp;
+            </div>
+          </div>
+          <div class="group-1">
+            <label>品名</label>
+            <div class="form-group condition-flex">
+              <bl-text-input
+                [value]="detailStockMoveCondition.partsName"
+                [maxlength]="100"
+                (changeEvent)="onChangePartsName($event)">
+              </bl-text-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-submit" detail-stock-move-slip-condition-footer>
+    <div class="search-condition-detail-footer">
+      <div class="search-condition-detail-footer-condition">
+
+      </div>
+      <div class="search-condition-detail-footer-btn">
+        <button class="btn btn-default" type="button" (click)="onClickClearButton()">
+          条件取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

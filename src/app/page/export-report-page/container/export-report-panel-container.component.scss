@@ -1,0 +1,54 @@
+.export-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+
+  &__header {
+    background: #f5f5f5;
+    padding: 5px 10px;
+    font-weight: 600;
+    border-top: 6px solid #00af84;
+    border-bottom: 1px solid #ddd;
+  }
+  &__body {
+    padding: 10px;
+  }
+}
+
+.export-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  &__label {
+    width: 185px;
+    min-width: 185px;
+    display: flex;
+    align-items: center;
+  }
+  &__value {
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    .single-input {
+      width: 300px;
+    }
+  }
+  &:last-child {
+    margin-bottom: 0px;
+  }
+  &.favorite-condition {
+    justify-content: space-between;
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+}
+
+.object-content {
+  width: 100%;
+}

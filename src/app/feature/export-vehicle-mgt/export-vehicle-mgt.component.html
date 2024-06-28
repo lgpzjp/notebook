@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="search-condition">
+        <div class="tab-header">
+          出力条件を指定して　出力開始　ボタンをクリックしてください。
+        </div>
+        <div class="tab-body">
+          <div class="row">
+            <div class="col-xs-12 search-condition__contents">
+              <div class="search-icon">
+                <span _ngcontent-c11="" class="icon-icon_search"></span>
+              </div>
+              <div class="big-g-1">
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力内容</label>
+                    <div class="form-group condition-flex">
+                      <bl-select id="outputVehicleMgt"
+                        [value]="exportCondition.outputInfo"
+                        [items]="VehicleExportContentArray"
+                        [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                        (changeEvent)="onChangeOutputInfo($event)">
+                      </bl-select>
+                    </div>
+                  </div>
+                  <div class="group-2">
+                    <label>対象期間</label>
+                    <div class="form-group condition-flex">
+                      <div class="small-item-in-g2-dr">
+                        <bl-select id="targetPeriodVehicleMgt"
+                          #targetPeriod
+                          [(value)]="exportCondition.targetPeriod"
+                          [items]="targetPeriodItems"
+                          [disabled]="!isShowDate">
+                        </bl-select>
+                      </div>
+                      <app-date-picker-condition
+                        [startDate]="startDate"
+                        [endDate]="endDate"
+                        (startDateChange)="onStartDateChange($event)"
+                        (endDateChange)="onEndDateChange($event)">
+                      </app-date-picker-condition>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力タイプ</label>
+                    <div class="form-group condition-flex">
+                      <bl-select id="exportInfoVehicleMgt"
+                        #exportInfoType
+                        [value]="exportCondition.exportInfoType"
+                        [items]="exportInfoTypeItems"
+                        (valueChange)="onChangeExportInfoType($event)"
+                        [disabled]="!isShowType">
+                      </bl-select>
+                    </div>
+                  </div>
+                  <div class="group-1">
+                    <label>組織</label>
+                    <div class="form-group condition-flex">
+                      <share-organization-combo-box id="organizationVehicleMgt"
+                        [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                        [value]="exportCondition.organizationCode"
+                        (changeEvent)="onChangeOrganizationCode($event)"
+                        [disabled]="!isShowOrganization">
+                      </share-organization-combo-box>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="big-g-2">
+                <button class="btn btn-default" type="button" id="onPanelVehicleMgt"
+                  (click)="onClickDetailButton()">
+                  <span>詳細条件</span>
+                  <span class="caret"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-detail-vehicle-mgt-condition
+          #detailConditionVehicleMgt
+          [detailVehicleMgtCondition]="exportCondition"
+          (clearCondition)="onClearCondition()">
+        </app-detail-vehicle-mgt-condition>
+      </div>
+    </div>
+    <app-export-pattern-selector
+      [tabID]="exportInfoTabDiv.VehicleMgt"
+      [(exportCondition)]="exportCondition"
+      [dataExportPatterns]="dataExportPatterns"
+      (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+    </app-export-pattern-selector>
+  </div>
+</div>

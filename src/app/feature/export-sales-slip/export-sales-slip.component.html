@@ -1,0 +1,145 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="search-condition">
+        <div class="tab-header">
+          出力条件を指定して　出力開始　ボタンをクリックしてください。
+        </div>
+        <div class="tab-body">
+          <div class="row">
+            <div class="col-xs-12 search-condition__contents">
+              <div class="search-icon">
+                <span _ngcontent-c11="" class="icon-icon_search"></span>
+              </div>
+              <div class="big-g-1">
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力内容</label>
+                    <div class="d-flex flex-wrap">
+                      <div class="u-mg10r">
+                        <bl-checkbox
+                          id="salesSlipExportContentLabelSales"
+                          [disabled]="!exportContentChangePossible"
+                          [value]="salesSlipExportContent.Sales"
+                          [label]="salesSlipExportContentMap[salesSlipExportContent.Sales]"
+                          [checked]="exportCondition.sales"
+                          (changeEvent)="onChangeSlipExportContentSales($event)">
+                        </bl-checkbox>
+                      </div>
+                      <div class="u-mg10r" *ngIf="productCode !== ProductCode.Recycle">
+                        <bl-checkbox
+                          id="salesSlipExportContentLabelEstimate"
+                          [disabled]="!exportContentChangePossible"
+                          [value]="salesSlipExportContent.Estimate"
+                          [label]="salesSlipExportContentMap[salesSlipExportContent.Estimate]"
+                          [checked]="exportCondition.estimate"
+                          (changeEvent)="onChangeSlipExportContentEstimates($event)">
+                        </bl-checkbox>
+                      </div>
+                      <div class="u-mg10r" *ngIf="productCode !== ProductCode.Recycle">
+                        <bl-checkbox
+                          id="salesSlipExportContentLabelOrder"
+                          [disabled]="!exportContentChangePossible"
+                          [value]="salesSlipExportContent.Order"
+                          [label]="salesSlipExportContentMap[salesSlipExportContent.Order]"
+                          [checked]="exportCondition.order"
+                          (changeEvent)="onChangeSlipExportContentOrder($event)">
+                        </bl-checkbox>
+                      </div>
+                      <div class="u-mg10r" *ngIf="productCode !== ProductCode.Recycle">
+                        <bl-checkbox
+                          id="salesSlipExportContentLabelLoan"
+                          [disabled]="!exportContentChangePossible"
+                          [value]="salesSlipExportContent.Loan"
+                          [label]="salesSlipExportContentMap[salesSlipExportContent.Loan]"
+                          [checked]="exportCondition.loan"
+                          (changeEvent)="onChangeSlipExportContentLoan($event)">
+                        </bl-checkbox>
+                      </div>
+                      <div class="u-mg10r" *shareServiceIf="serviceIdOptCmnCredit">
+                        <bl-checkbox
+                          id="salesSlipExportContentLabelDeposit"
+                          [disabled]="true"
+                          [value]="salesSlipExportContent.Deposit"
+                          [label]="salesSlipExportContentMap[salesSlipExportContent.Deposit]"
+                          [checked]="exportCondition.deposit"
+                          (changeEvent)="onChangeSlipExportContentDeposit($event)">
+                        </bl-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-2">
+                    <label>対象期間</label>
+                    <div class="form-group condition-flex">
+                      <div class="small-item-in-g2-dr">
+                        <bl-select
+                          #targetPeriod
+                          [value]="exportCondition.targetPeriod"
+                          [items]="SalesSlipSupplierSelectArray"
+                          [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                          (changeEvent)="onChangeTargetPeriod($event)">
+                        </bl-select>
+                      </div>
+                      <app-date-picker-condition
+                        [startDate]="startDate"
+                        [endDate]="endDate"
+                        [displayEndDate]="displayEndDate"
+                        (startDateChange)="onStartDateChange($event)"
+                        (endDateChange)="onEndDateChange($event)">
+                      </app-date-picker-condition>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力タイプ</label>
+                    <div class="form-group condition-flex">
+                      <bl-select
+                        #exportInfoType
+                        [value]="exportCondition.exportInfoType"
+                        [items]="ExportSlipTypeDivArray"
+                        [option]="{ valueProperty: 'value', labelProperty: 'text' }"
+                        (valueChange)="onChangeExportInfoType($event)">
+                      </bl-select>
+                    </div>
+                  </div>
+                  <div class="group-1">
+                    <label>組織</label>
+                    <div class="form-group condition-flex">
+                      <share-organization-combo-box
+                        id="organization"
+                        [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                        [(value)]="exportCondition.organization">
+                      </share-organization-combo-box>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="big-g-2">
+                <button class="btn btn-default" type="button"
+                  (click)="onClickDetailButton()">
+                  <span>詳細条件</span>
+                  <span class="caret"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-detail-sales-slip-condition
+          #detailConditionSalesSlip
+          [detailSalesSlipCondition]="exportCondition"
+          [organizationSelectPossible]="organizationSelectPossible"
+          [customerSelectPossible]="customerSelectPossible"
+          [exportInfoType]="exportCondition.exportInfoType"
+          (clearCondition)="onClearCondition()">
+        </app-detail-sales-slip-condition>
+      </div>
+    </div>
+    <app-export-pattern-selector
+      [tabID]="productCode === ProductCode.Recycle ? exportInfoTabDiv.RecycleSalesSlip : exportInfoTabDiv.SalesSlip"
+      [(exportCondition)]="exportCondition"
+      [dataExportPatterns]="dataExportPatterns"
+      (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+    </app-export-pattern-selector>
+  </div>
+</div>

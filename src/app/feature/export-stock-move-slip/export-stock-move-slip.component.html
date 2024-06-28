@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="search-condition">
+        <div class="tab-header">
+          出力条件を指定して　出力開始　ボタンをクリックしてください。
+        </div>
+        <div class="tab-body">
+          <div class="row">
+            <div class="col-xs-12 search-condition__contents">
+              <div class="search-icon">
+                <span _ngcontent-c11="" class="icon-icon_search"></span>
+              </div>
+              <div class="big-g-1">
+                <div class="row">
+                  <div class="group-1">
+                    <label>出力内容</label>
+                    <div class="form-group condition-flex" *ngIf="showFlgs">
+                      <bl-checkbox
+                        [value]="stockMoveExportContent.Shipping"
+                        [label]="StockMoveExportContentMap[stockMoveExportContent.Shipping]"
+                        [checked]="exportCondition.shipping"
+                        (changeEvent)="onChangeShipping($event)">
+                      </bl-checkbox>
+                      <bl-checkbox
+                        [value]="stockMoveExportContent.NonArrival"
+                        [label]="StockMoveExportContentMap[stockMoveExportContent.NonArrival]"
+                        [checked]="exportCondition.nonArrival"
+                        (changeEvent)="onChangeNonArrival($event)">
+                      </bl-checkbox>
+                      <bl-checkbox
+                        [value]="stockMoveExportContent.Arrived"
+                        [label]="StockMoveExportContentMap[stockMoveExportContent.Arrived]"
+                        [checked]="exportCondition.arrived"
+                        (changeEvent)="onChangeArrived($event)">
+                      </bl-checkbox>
+                    </div>
+                    <div class="form-group condition-flex" *ngIf="showFlge">
+                      <bl-checkbox
+                        [value]="stockMoveExportContent.Shipment"
+                        [label]="StockMoveExportContentMap[stockMoveExportContent.Shipment]"
+                        [checked]="exportCondition.shipment"
+                        (changeEvent)="onChangeShipment($event)">
+                      </bl-checkbox>
+                      <bl-checkbox
+                        [value]="stockMoveExportContent.Entering"
+                        [label]="StockMoveExportContentMap[stockMoveExportContent.Entering]"
+                        [checked]="exportCondition.entering"
+                        (changeEvent)="onChangeEntering($event)">
+                      </bl-checkbox>
+                    </div>
+                  </div>
+                  <div class="group-2">
+                    <label>対象期間</label>
+                    <div class="form-group condition-flex">
+                      <div class="small-item-in-g2-dr">
+                        <bl-select id="targetPeriodstockMoveSlip"
+                          #targetPeriod
+                          [value]="exportCondition.targetPeriod"
+                          [items]="targetPeriodItems"
+                          (changeEvent)="onChangeTargetPeriod($event)">
+                        </bl-select>
+                      </div>
+                      <app-date-picker-condition
+                        [startDate]="startDate"
+                        [endDate]="endDate"
+                        (startDateChange)="onStartDateChange($event)"
+                        (endDateChange)="onEndDateChange($event)">
+                      </app-date-picker-condition>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="group-1">
+                    <label>出庫組織</label>
+                    <div class="form-group condition-flex">
+                      <share-organization-combo-box id="shippingOrganizationCode"
+                        [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                        [value]="exportCondition.shippingOrganizationCode"
+                        (changeEvent)="onChangeSlipShippingOrganizationCode($event)">
+                      </share-organization-combo-box>
+                    </div>
+                  </div>
+                  <div class="group-1">
+                    <label>入庫組織</label>
+                    <div class="form-group condition-flex">
+                      <share-organization-combo-box id="enteringOrganizationCode"
+                        [withAllCompanyDiv]="withAllCompanyDiv.AllCompany"
+                        [value]="exportCondition.enteringOrganizationCode"
+                        (changeEvent)="onChangeSlipEnteringOrganizationCode($event)">
+                      </share-organization-combo-box>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="big-g-2">
+                <button class="btn btn-default" type="button" id="onPanelPurchase"
+                  (click)="onClickDetailButton()">
+                  <span>詳細条件</span>
+                  <span class="caret"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-detail-stock-move-slip-condition
+          #detailConditionStockMoveSlip
+          [detailStockMoveCondition]="exportCondition"
+          (changeEvent)="onChangeDetailStockMoveCondition($event)"
+          (clearCondition)="onClearCondition()">
+        </app-detail-stock-move-slip-condition>
+      </div>
+    </div>
+    <app-export-pattern-selector
+      [tabID]="exportInfoTabDiv.StockMoveSlip"
+      [(exportCondition)]="exportCondition"
+      [dataExportPatterns]="dataExportPatterns"
+      (changeExportPatternEvent)="onChangeDataExportPattern($event)">
+    </app-export-pattern-selector>
+  </div>
+</div>

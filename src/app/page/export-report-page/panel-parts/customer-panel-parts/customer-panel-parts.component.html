@@ -1,0 +1,82 @@
+<div>
+  <div *ngIf="conditionShown.customerNameKana" class="export-item">
+    <div class="export-item__label"><span>顧客カナ</span></div>
+    <div class="export-item__value">
+      <div class="range-input">
+        <bl-text-range
+          [(startValue)]="condition.customerNameKanaStart"
+          [(endValue)]="condition.customerNameKanaEnd"
+          [maxlength]="60"
+          [option]="{ allows: ['katakana', 'number', 'alphabet', 'symbol'], convertKana: true}"
+        ></bl-text-range>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="conditionShown.customerCode" class="export-item">
+    <div class="export-item__label"><span>顧客コード</span></div>
+    <div class="export-item__value">
+      <div class="range-input">
+        <bl-number-range
+          [(startValue)]="condition.customerCodeStart"
+          [(endValue)]="condition.customerCodeEnd"
+          [option]="{ intLength: 9 }"
+        ></bl-number-range>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.customerSub_code" class="export-item">
+    <div class="export-item__label"><span>顧客サブコード</span></div>
+    <div class="export-item__value">
+      <div class="range-input">
+        <bl-text-range
+          [(startValue)]="condition.customerSub_codeStart"
+          [(endValue)]="condition.customerSub_codeEnd"
+          [option]="{ allows: ['number'], convertHalf: true }"
+          [maxlength]="9"
+        ></bl-text-range>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="conditionShown.receptPicName" class="export-item">
+    <div class="export-item__label"><span>顧客担当</span></div>
+    <div class="export-item__value">
+      <div class="multi-input">
+        <div class="input-group">
+          <bl-text-input
+            [value]="condition.receptPicName1"
+            [maxlength]="10"
+            (changeEvent)="onChangeEmployeeCode($event, 0)"
+          ></bl-text-input>
+          <span class="input-group-btn">
+            <button
+              #receptPicGuideButton1
+              class="btn btn-default"
+              type="button"
+              (click)="onClickEmployeeGuide(0)"
+            >
+              <span aria-hidden="true" class="icon-icon_guide"></span>
+            </button>
+          </span>
+        </div>
+        <div class="input-group">
+          <bl-text-input
+            [value]="condition.receptPicName2"
+            [maxlength]="10"
+            (changeEvent)="onChangeEmployeeCode($event, 1)"
+          ></bl-text-input>
+          <span class="input-group-btn">
+            <button
+              #receptPicGuideButton2
+              class="btn btn-default"
+              type="button"
+              (click)="onClickEmployeeGuide(1)"
+            >
+              <span aria-hidden="true" class="icon-icon_guide"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
